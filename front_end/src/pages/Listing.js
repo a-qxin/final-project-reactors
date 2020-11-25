@@ -15,7 +15,7 @@ const Listing = () => {
     <div>
       <div>
         <div style={listingContainer}>
-          <img src={defaultImage} width="120px" alt='defaultImage'/>
+          <img src={defaultImage} width="150px" alt='defaultImage'/>
           <h4>Smol Reactor</h4>
         </div>
       </div>

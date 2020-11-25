@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div>
       <div>
-        
+
         <div>
           <div>
             <h3>Welcome to the reactorsHub!</h3>

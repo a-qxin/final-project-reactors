@@ -5,7 +5,8 @@ import { createStore, applyMiddleware } from 'redux';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './redux/reducers/rootReducer';
 import thunk from 'redux-thunk';
-import App from './App';
+// import App from './App';
+import Home from './pages/Home';
 import './App.css';
 
 import {
@@ -22,7 +23,7 @@ ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
-        <App/>
+        <Home />
       </BrowserRouter>
     </React.StrictMode>
   </Provider>,
