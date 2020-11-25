@@ -5,10 +5,10 @@ const Listing = () => {
   const listingContainer = {
     textAlign:'center', 
     backgroundColor:'rgba(255, 255, 255, 0.4)', 
-    // margin:'auto', 
     width:'300px', 
+    margin:'20px',
     padding:'50px 0 20px 0', 
-    borderRadius:'30px'
+    borderRadius:'30px',
   };
 
   return (

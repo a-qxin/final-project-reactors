@@ -8,14 +8,16 @@ const Home = () => {
   return (
     <div>
       <div>
-        {/* <h1>reactorsHub</h1> */}
         <div>
           <h3>welcome</h3>
         </div>
 
-        <div>
-          <Listing />
+        <div style={{textAlign:'center'}}>
+          <div style={{display:'flex', flexWrap:'wrap'}}>
+            <Listing />
+          </div>
         </div>
+
       </div>
     </div>
   );
