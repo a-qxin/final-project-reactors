@@ -1,5 +1,5 @@
 import React from 'react';
-import defaultImage from '../assets/defaultimage.png';
+import defaultImage from '../assets/defaultimage.svg';
 
 const Listing = () => {
   const listingContainer = {
@@ -10,13 +10,18 @@ const Listing = () => {
     padding:'50px 0 20px 0', 
     borderRadius:'30px',
   };
+  const listingTitle = {
+    margin:'30px'
+  };
 
   return (
     <div>
       <div>
         <div style={listingContainer}>
           <img src={defaultImage} width="150px" alt='defaultImage'/>
-          <h4>Smol Reactor</h4>
+          <div style={listingTitle}>
+            <h2>Smol Reactor</h2>
+          </div>
         </div>
       </div>
     </div>

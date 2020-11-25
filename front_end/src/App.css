@@ -13,6 +13,18 @@ a {
   color: black;
 }
 
+h1 {
+  font-size: 34px;
+}
+h2 {
+  font-size: 22px;
+}
+
 .title {
   text-align: center;
+  margin:50px;
+}
+
+#listingItem {
+  flex: 0 0 33.3333%;
 }
