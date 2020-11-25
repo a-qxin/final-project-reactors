@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div>
       <div>
-        <h1>reactorsHub</h1>
+        {/* <h1>reactorsHub</h1> */}
         <div>
           welcome
         </div>
