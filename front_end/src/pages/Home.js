@@ -5,9 +5,11 @@ import React from 'react';
 const Home = () => {
   return (
     <div>
-      <h1>reactorsHub</h1>
       <div>
-        welcome
+        <h1>reactorsHub</h1>
+        <div>
+          welcome
+        </div>
       </div>
     </div>
   );

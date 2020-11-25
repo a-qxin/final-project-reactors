@@ -6,8 +6,11 @@ import Home from './pages/Home';
 import { Switch, Route, Link } from 'react-router-dom';
 
 const App = () => {
+  const bg = {
+    background: '#FDEAC3',
+  };
   return (
-    <div className="App">
+    <div className="App" style={bg}>
       <nav>
         <Link to="/home">Home</Link>
         {/* <Link to="/about">About</Link> */}
