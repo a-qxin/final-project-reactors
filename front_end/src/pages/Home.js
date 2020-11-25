@@ -8,8 +8,11 @@ const Home = () => {
   return (
     <div>
       <div>
+        
         <div>
-          <h3>welcome</h3>
+          <div>
+            <h3>Welcome to the reactorsHub!</h3>
+          </div>
         </div>
 
         <div style={{textAlign:'center'}}>
