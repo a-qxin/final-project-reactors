@@ -31,7 +31,7 @@ const Home = () => {
     display:'flex',
     verticalAlign: 'center',
     margin:'auto',
-    textAlign:'center'
+    textAlign:'center',
   };
   const titleRightText = {
     fontWeight:'500',
