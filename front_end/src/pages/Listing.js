@@ -5,9 +5,9 @@ const Listing = () => {
   const listingContainer = {
     textAlign:'center', 
     backgroundColor:'rgba(255, 255, 255, 0.4)', 
-    width:'300px', 
+    width:'320px', 
     margin:'20px',
-    padding:'50px 0 20px 0', 
+    padding:'70px 0 40px 0', 
     borderRadius:'30px',
   };
   const listingTitle = {
@@ -20,7 +20,7 @@ const Listing = () => {
         <div style={listingContainer}>
           <img src={defaultImage} width="150px" alt='defaultImage'/>
           <div style={listingTitle}>
-            <h2>Smol Reactor</h2>
+            <h3>Smol Reactor</h3>
           </div>
         </div>
       </div>
