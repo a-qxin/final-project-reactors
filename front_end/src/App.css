@@ -1,38 +1,52 @@
-.App {
+/* .App {
   text-align: center;
+} */
+
+* {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a, button {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-decoration: none;
+}
+a {
+  color: black;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+  font-size: 40px;
+}
+h2 {
+  font-size: 28px;
+}
+h3 {
+  font-size: 22px;
+}
+h4 {
+  font-size: 18px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.button {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:20px;
+  font-weight:500;
+  padding:10px 40px;
+  border-radius:20px;
+  border:none;
+  background:white;
+  cursor:pointer;
+}
+.button:disabled {
+  background:rgba(256, 256, 256, 0.5);
 }
 
-.App-link {
-  color: #61dafb;
+.title {
+  text-align: center;
+  margin: 40px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#listingItem {
+  flex: 0 0 33.3333%;
 }

@@ -5,12 +5,14 @@ import { createStore, applyMiddleware } from 'redux';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './redux/reducers/rootReducer';
 import thunk from 'redux-thunk';
+// import App from './App';
+import Home from './pages/Home';
 import './App.css';
 
 import {
   BrowserRouter,
-  Switch,
-  Route,
+  // Switch,
+  // Route,
 } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
@@ -21,6 +23,7 @@ ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
+        <Home />
       </BrowserRouter>
     </React.StrictMode>
   </Provider>,
