@@ -2,11 +2,10 @@ const express = require('express')
 const router = express.Router()
 const userController = require('./controllers/userController')
 const listingController = require('./controllers/listingController')
-const inquiriesController = require('./controllers/inquiriesContoller')
+const inquiryController = require('./controllers/inquiryController')
 
 
 // User related routes
-router.get('/', userController.home)
 router.post('/register', userController.register)
 router.post('/login', userController.login)
 router.post('/logout', userController.logout)
@@ -16,13 +15,13 @@ router.post('/doesEmailExist', userController.doesEmailExist)
 
 // Listing related routes
 router.post('/create-listing' , userController.mustBeLoggedIn, listingController.create)
-router.post('/listing/:id/edit', userController.mustBeLoggedIn , listingController.edit)
-router.post('/listing/:id/delete', userController.mustBeLoggedIn , listingController.delete)
-router.get('/listing/:id' , listingController.getById)
+router.post('/listing/update', userController.mustBeLoggedIn , listingController.update)
+router.post('/listing/delete', userController.mustBeLoggedIn , listingController.delete)
+router.get('/listing/getByAuthor' , listingController.getByAuthor)
 
 
 // Inquiry related routes
-router.post('/create-inquiry/:id', userController.mustBeLoggedIn, inquiriesController.create)
-router.post('/inquiry/:id/edit', userController.mustBeLoggedIn, inquiriesController.edit)
-router.post('/inquiry/:id/delete', userController.mustBeLoggedIn, inquiriesController.delete)
-router.get('/inquiry/:id' , inquiriesController.getById)
+router.post('/create-inquiry', userController.mustBeLoggedIn, inquiryController.create)
+router.get('/inquiry' ,userController.mustBeLoggedIn, inquiryController.getById)
+
+module.exports = router

@@ -1,14 +1,11 @@
 const userCollection = require('../db').db().collection("users")
 const validator = require("validator")
 const bcrypt = require('bcryptjs')
-const md5 = require('md5')
 
 
 let User = function(data){
-
     this.data = data
     this.errors = []
-
 }
 
 User.prototype.cleanUp = function() {
@@ -67,6 +64,8 @@ User.prototype.login = function() {
     return new Promise((resolve, reject)=>{
         //Validate data  
         this.cleanUp() 
+        console.log(this.data.username , this.data.password)
+        
         userCollection.findOne({username: this.data.username}).then((attemptedUser)=>{
             //Check if user name was found and password is a match
             if(attemptedUser && bcrypt.compareSync(this.data.password, attemptedUser.password)){
@@ -118,7 +117,6 @@ User.findByUsername = function(username){
                 userDoc = {
                     _id: userDoc.data._id,
                     username: userDoc.data.username,
-                    avatar: userDoc.avatar
                 }
                 resolve(userDoc)
             } else {

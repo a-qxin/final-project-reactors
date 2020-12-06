@@ -1,14 +1,14 @@
 const mongodb = require('mongodb')
-const dotenv = require('dotenv')
-dotenv.config()
+
+let connectionString = "mongodb+srv://admin:reactors667@cluster0.vf1ym.mongodb.net/reactors_db?retryWrites=true&w=majority"
 
 //Open connection
-mongodb.connect(process.env.CONNECTIONSTRING , {useNewUrlParser: true, useUnifiedTopology: true} , (err, client)=>{
+mongodb.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true} , (err, client)=>{
     //export database connected database
     module.exports = client
 
     //Start express server after db is connected
     const app = require('./app')
     
-    app.listen(process.env.PORT)
+    app.listen(3000)
 })

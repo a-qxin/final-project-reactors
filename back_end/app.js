@@ -1,7 +1,8 @@
 const express = require("express");
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
-const csrf = require('csurf')
+// const csrf = require('csurf')
+const markdown = require('marked')
 const sanitizeHTML = require('sanitize-html')
 const app = express();
 
@@ -42,27 +43,28 @@ const router = require('./router')
 //Make public accessible
 app.use(express.static('public'))
 
-//Add crsf protection
-app.use(csrf())
+// //Add crsf protection
+// app.use(csrf())
 
-app.use(function(req, res, next){
-  res.locals.csrfToken = req.csrfToken()
-  next()
-})
+// app.use(function(req, res, next){
+//   res.locals.csrfToken = req.csrfToken()
+//   next()
+// })
 
 //Set base router
 app.use('/' , router)
 
-app.use( function (err, req, res, next){
-  if(err){
-      if(err.code == "EBADCSRFTOKEN"){
-          // req.flash('errors',"Cross site request forgery detected")
-          req.session.save(()=> res.redirect('/'))
-      } else {
-          res.render("404")
-      }
-  }
-})
+
+// app.use( function (err, req, res, next){
+//   if(err){
+//       if(err.code == "EBADCSRFTOKEN"){
+//           // req.flash('errors',"Cross site request forgery detected")
+//           req.session.save(()=> res.redirect('/'))
+//       } else {
+//           res.send("Its a 404")
+//       }
+//   }
+// })
 
 const server = require('http').createServer(app)
 

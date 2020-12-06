@@ -12,8 +12,6 @@ exports.apiMustBeLoggedIn = function (req, res, next){
     }
 }
 
-
-
 exports.doesUsernameExist = function(req, res){
     User.findByUsername(req.body.username).then(function(){
         res.json(true)
@@ -30,13 +28,11 @@ exports.doesEmailExist = async function(req, res){
 
 
 exports.mustBeLoggedIn = function (req, res, next){
+    console.log(req.session.user)
     if(req.session.user){
         next()
     } else {
-        req.flash("errors", "You must be logged in to perform that action")
-        req.session.save(()=>{
-            res.redirect('/')
-        })
+        res.send("You do not have authorization")
     }
 }
 
@@ -48,16 +44,19 @@ exports.login = function(req , res) {
     //User login. Promise returned
     user.login().then((result)=>{
         //Set session data for user
-        req.session.user= {avatar: user.avatar, username: user.data.username, _id: user.data._id}
+        req.session.user= {username: user.data.username, _id: user.data._id}
         req.session.save(()=>{
             //Redirect after session data is saved
-            res.redirect('/')
+            // res.redirect('/')
+            console.log('logged in and session data saved')
+            console.log(req.session.user)
+            res.send('logged in')
         })
     }).catch((err)=>{
         //Save errors in sessions using flash
-        req.flash('errors',err)
+        // req.flash('errors',err)
         req.session.save(()=>{
-            res.redirect('/')
+            console.log(err)
         })
     })
 }
@@ -71,22 +70,18 @@ exports.logout = function(req , res) {
 }
 
 
-
 exports.register = function(req , res) {
     //create a new user object
     let user = new User(req.body)
     user.register().then(()=>{
-        req.session.user = {avatar: user.avatar, username: user.data.username , _id: user.data._id}
+        req.session.user = {username: user.data.username , _id: user.data._id}
         req.session.save(()=>{
-            res.redirect('/')
+            console.log(`Successfully registered user ${user.data.username}`)
+            res.send(`Successfully registered user ${user.data.username}`)
         })
     }).catch((regErrors)=>{
-        regErrors.forEach((error)=>{
-            req.flash('regErrors', error)
-        })
-        req.session.save(()=>{
-            res.redirect('/')
-        })
+        console.log(regErrors)
+        res.send(regErrors)
     })
 }
 
