@@ -1,4 +1,4 @@
-const inquiryCollection = require('../db').db().collection("inquiries")
+const inquiryCollection = require('../server/db').db().collection("inquiries")
 
 let Inquiry = function(data){
 	this.data = data

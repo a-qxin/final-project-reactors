@@ -1,4 +1,4 @@
-const listingCollection = require('../db').db().collection("listings")
+const listingCollection = require('../server/db').db().collection("listings")
 const ObjectID = require('mongodb').ObjectID
 const User = require('./User')
 const sanitizeHTML = require('sanitize-html')

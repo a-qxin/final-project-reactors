@@ -38,7 +38,7 @@ app.use(function(req, res, next){
 })
 
 
-const router = require('./router')
+const router = require('../router')
 
 //Make public accessible
 app.use(express.static('public'))
