@@ -15,7 +15,7 @@ Inquiry.prototype.cleanUp = function() {
     //get rid of any bogus properties and trim whitespace
     this.data = {
         listingId: this.data.listingId,
-        message: this.data.message
+        message: this.data.message,
     }
 }
 
