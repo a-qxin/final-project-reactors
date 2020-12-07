@@ -38,7 +38,7 @@ app.use(function(req, res, next){
 })
 
 
-const router = require('../router')
+const router = require('./router')
 
 //Make public accessible
 app.use(express.static('public'))
@@ -50,6 +50,8 @@ app.use(express.static('public'))
 //   res.locals.csrfToken = req.csrfToken()
 //   next()
 // })
+
+const wss = require('./webSocket.js')
 
 //Set base router
 app.use('/' , router)

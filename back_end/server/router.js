@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const userController = require('./controllers/userController')
-const listingController = require('./controllers/listingController')
-const inquiryController = require('./controllers/inquiryController')
+const userController = require('../controllers/userController')
+const listingController = require('../controllers/listingController')
+const inquiryController = require('../controllers/inquiryController')
 
 
 // User related routes
@@ -21,7 +21,11 @@ router.get('/listing/getByAuthor' , listingController.getByAuthor)
 
 
 // Inquiry related routes
-router.post('/create-inquiry', userController.mustBeLoggedIn, inquiryController.create)
+// router.post('/create-inquiry', userController.mustBeLoggedIn, inquiryController.create)
+router.post('/create-inquiry' ,inquiryController.create)
 router.get('/inquiry' ,userController.mustBeLoggedIn, inquiryController.getById)
+router.get('/create-inquiry', (req, res)=>{
+    res.send('hello')
+})
 
 module.exports = router

@@ -1,4 +1,6 @@
 const inquiryCollection = require('../server/db').db().collection("inquiries")
+const redis = require('redis');
+const client = redis.createClient({ host:'localhost' });
 
 let Inquiry = function(data){
 	this.data = data
@@ -35,8 +37,10 @@ Inquiry.prototype.create = function (){
         await this.validate()
     
         //Save user to db if no errors
-        if (!this.errors.length){            
+        if (!this.errors.length){        
+               
             await inquiryCollection.insertOne(this.data)
+            client.publish('inquiries', JSON.stringify(this.data));
             resolve(this.data)
         }
         else{

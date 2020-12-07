@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon db.js"
+    "start": "nodemon server/db.js"
   },
   "author": "",
   "license": "ISC",
@@ -24,7 +24,8 @@
     "nodemon": "^2.0.6",
     "redis": "^3.0.2",
     "sanitize-html": "^2.1.2",
-    "validator": "^13.1.17"
+    "validator": "^13.1.17",
+    "ws": "^7.4.1"
   },
   "description": ""
 }
