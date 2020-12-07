@@ -10,5 +10,5 @@ mongodb.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: tr
     //Start express server after db is connected
     const app = require('./app')
     
-    app.listen(3000)
+    app.listen(5000)
 })
