@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Redirect, useLocation } from 'react-router-dom';
+import { Switch, Redirect, useLocation, Link } from 'react-router-dom';
 
 import PrivateRoute from './pages/PrivateRoute';
 
@@ -19,7 +19,9 @@ const App = () => {
     <div className="App" style={bg}>
 
       <div className='title'>
-        <h2>reactorsHub</h2>
+        <Link exact to='/'>
+          <h2>reactorsHub</h2>
+        </Link>
       </div>
 
       <Switch>
