@@ -41,7 +41,8 @@ const ViewListing = () => {
                 <img src={defaultImage} width="150px" alt='defaultImage' />
               </div>
               <div style={{paddingTop:'30px'}}>
-                <button className='button'>Add a picture</button>
+                {/* <button className='button'>Add a picture</button> */}
+                {/* image hover thumbs go here */}
               </div>
             </div>
 
