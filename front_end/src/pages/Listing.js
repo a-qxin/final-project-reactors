@@ -5,7 +5,7 @@ const Listing = () => {
   const listingContainer = {
     textAlign:'center', 
     backgroundColor:'rgba(255, 255, 255, 0.4)', 
-    width:'320px', 
+    // width:'320px', 
     margin:'20px',
     padding:'70px 0 40px 0', 
     borderRadius:'30px',
