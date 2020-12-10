@@ -1,22 +1,50 @@
 import React from 'react';
+import { Switch, Redirect, useLocation } from 'react-router-dom';
+
+import PrivateRoute from './pages/PrivateRoute';
 
 import Home from './pages/Home';
-// import AppliedRoute from './pages/AppliedRoute';
+import NewListing from './pages/NewListing';
+import ViewListing from './pages/ViewListing';
 
-// import { Switch, Route } from 'react-router-dom';
-//Link
 
 const App = () => {
   const bg = {
     background: '#FDEAC3',
   };
 
+  const { pathname } = useLocation(); 
+
   return (
     <div className="App" style={bg}>
 
-      {/* move logo title here  */}
-    
-      <Home />
+      <div className='title'>
+        <h2>reactorsHub</h2>
+      </div>
+
+      <Switch>
+        <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} />
+        <PrivateRoute 
+          exact 
+          path="/" 
+          component={Home} 
+        />
+        <PrivateRoute 
+          exact 
+          path="/newListing" 
+          component={NewListing} 
+        />
+        <PrivateRoute 
+          exact 
+          path="/newListing" 
+          component={ViewListing} 
+        />
+
+        {/* <Route path="/account" component={Account} /> */}
+        <Redirect from="*" to="/" />
+        <Home />
+
+      </Switch>
     </div>
   );
 };
