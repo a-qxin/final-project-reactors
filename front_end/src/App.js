@@ -1,35 +1,54 @@
-// import React from 'react';
+import React from 'react';
+import { Switch, Redirect, useLocation, Link } from 'react-router-dom';
 
-// import Home from './pages/Home';
+import PrivateRoute from './pages/PrivateRoute';
 
-// import { Switch, Route } from 'react-router-dom';
-// //Link
+import Home from './pages/Home';
+import NewListing from './pages/NewListing';
+import ViewListing from './pages/ViewListing';
 
-// const App = () => {
-//   const bg = {
-//     background: '#FDEAC3',
-//   };
-//   const nav = {
-//     textAlign:'center',
-//     padding:'60px'
-//   };
-//   // const title = {
-//   //   fontSize:'28px', 
-//   //   fontWeight:'bold', 
-//   //   margin:'100px',
-//   // };
 
-//   return (
-//     <div className="App" style={bg}>
-//       <nav style={nav}>
-//         {/* <Link to="/home" style={title}>reactorsHub</Link> */}
-//         <Home />
-//       </nav>
-//       <Switch>
-//         <Route path="/home" component={Home} />
-//       </Switch>
-//     </div>
-//   );
-// };
+const App = () => {
+  const bg = {
+    background: '#FDEAC3',
+  };
 
-// export default App;
+  const { pathname } = useLocation(); 
+
+  return (
+    <div className="App" style={bg}>
+
+      <div className='title'>
+        <Link exact to='/'>
+          <h2>reactorsHub</h2>
+        </Link>
+      </div>
+
+      <Switch>
+        <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} />
+        <PrivateRoute 
+          exact 
+          path="/" 
+          component={Home} 
+        />
+        <PrivateRoute 
+          exact 
+          path="/newlisting" 
+          component={NewListing} 
+        />
+        <PrivateRoute 
+          exact 
+          path="/viewlisting" 
+          component={ViewListing} 
+        />
+
+        {/* <Route path="/account" component={Account} /> */}
+        <Redirect from="*" to="/" />
+        <Home />
+
+      </Switch>
+    </div>
+  );
+};
+
+export default App;

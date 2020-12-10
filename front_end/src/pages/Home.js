@@ -45,14 +45,16 @@ const Home = () => {
     width: '1px',
     background:'#707070',
   };
+  const listingsContainer = {
+    width: '1150px', 
+    display: 'flex', 
+    flexWrap: 'wrap', 
+    margin: '0 auto',
+  };
 
   return (
     <div>
       <div>
-
-        <div className='title'>
-          <h2>reactorsHub</h2>
-        </div>
 
         <div style={center}>
           <div style={heroContainer}>
@@ -109,7 +111,7 @@ const Home = () => {
           <div className='title'>
             <h2>Listings</h2>
           </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', margin: '0 10vw' }}>
+          <div style={listingsContainer}>
             <div id='listingItem'>
               <Listing id='listingItem' />
             </div>
