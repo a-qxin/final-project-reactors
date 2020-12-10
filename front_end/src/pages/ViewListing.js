@@ -8,7 +8,8 @@ const ViewListing = () => {
     margin: 'auto',
   };
   const pageContainer = {
-    background: '#fef3da',
+    // background: '#fef3da',
+    background: 'rgba(255, 255, 255, 0.4)',
     margin: '0 0 140px 0',
     padding: '60px 60px',
     borderRadius: '40px',
@@ -16,6 +17,7 @@ const ViewListing = () => {
   const verticalHr = {
     width: '1px',
     background: '#707070',
+    margin:'0 10px',
   };
   const fieldContainer = {
     display: 'flex',
@@ -41,8 +43,6 @@ const ViewListing = () => {
                 <img src={defaultImage} width="150px" alt='defaultImage' />
               </div>
               <div style={{paddingTop:'30px'}}>
-                {/* <button className='button'>Add a picture</button> */}
-                {/* image hover thumbs go here */}
               </div>
             </div>
 

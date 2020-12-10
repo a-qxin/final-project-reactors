@@ -9,7 +9,8 @@ const NewListing = () => {
     margin: 'auto',
   };
   const pageContainer = {
-    background: '#fef3da',
+    // background: '#fef3da',
+    background: 'rgba(255, 255, 255, 0.4)',
     margin: '0 0 140px 0',
     padding: '60px 60px',
     borderRadius: '40px',
@@ -17,6 +18,7 @@ const NewListing = () => {
   const verticalHr = {
     width: '1px',
     background: '#707070',
+    margin:'0 10px',
   };
   const fieldContainer = {
     display: 'flex',
@@ -40,7 +42,7 @@ const NewListing = () => {
           <div><h1>Create a new listing!</h1></div>
 
           <div style={{ display: 'flex', justifyContent: 'center', padding: '50px 0', }}>
-            <div style={{ width: '600px', margin: 'auto', textAlign: 'center' }}>
+            <div style={{ width: '599px', margin: 'auto', textAlign: 'center' }}>
               <div>
                 <img src={defaultImage} width="150px" alt='defaultImage' />
               </div>
