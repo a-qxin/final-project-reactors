@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import NewListing from './pages/NewListing';
 import ViewListing from './pages/ViewListing';
 import Manage from './pages/Manage';
-
+import Message from './pages/Message';
 
 const App = () => {
   const bg = {
@@ -46,6 +46,11 @@ const App = () => {
           exact 
           path="/manage" 
           component={Manage} 
+        />
+        <PrivateRoute 
+          exact 
+          path="/message" 
+          component={Message} 
         />
 
         {/* <Route path="/account" component={Account} /> */}

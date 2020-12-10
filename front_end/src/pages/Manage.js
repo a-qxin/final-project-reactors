@@ -1,7 +1,5 @@
 import React from 'react';
 
-// import { useSelector } from 'react-redux';
-
 import Listing from './Listing.js';
 
 const Manage = () => {
@@ -62,7 +60,7 @@ const Manage = () => {
 
               <div style={{display:'flex', fontWeight:'bold'}}>
                 <div id='threeCol'>
-                  <h3 style={newMessageText}>Rick Harisson</h3>
+                  <h3 style={newMessageText}>Rick Harrison</h3>
                 </div>
                 <div id='threeCol'>
                   <h3 style={newMessageText}>12/04/2020</h3>
