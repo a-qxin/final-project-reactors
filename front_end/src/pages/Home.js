@@ -50,10 +50,6 @@ const Home = () => {
     <div>
       <div>
 
-        <div className='title'>
-          <h2>reactorsHub</h2>
-        </div>
-
         <div style={center}>
           <div style={heroContainer}>
             <div>
