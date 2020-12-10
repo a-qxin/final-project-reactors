@@ -51,6 +51,14 @@ input::placeholder {
   font-size:20px;
 }
 
+.hr {
+  margin:10px 0;
+  border:none; 
+  height:1px;
+  color: #a9a9a9;
+  background-color: #a9a9a9;
+}
+
 .button {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size:20px;
@@ -85,6 +93,6 @@ input::placeholder {
   margin: 40px;
 }
 
-#listingItem {
+#threeCol {
   flex: 0 0 33.3333%;
 }

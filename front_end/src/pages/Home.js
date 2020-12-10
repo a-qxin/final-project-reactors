@@ -76,7 +76,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div style={titleRightContainer}>
+            {<div style={titleRightContainer}>
               <div>
                 <div>
                   <h2 style={titleRightText}>New to reactorsHub?</h2>
@@ -102,7 +102,7 @@ const Home = () => {
                   <button className='button'>Sign in</button>
                 </div>
               </div>
-            </div>
+            </div>}
 
           </div>
         </div>
@@ -112,16 +112,16 @@ const Home = () => {
             <h2>Listings</h2>
           </div>
           <div style={listingsContainer}>
-            <div id='listingItem'>
+            <div id='threeCol'>
               <Listing id='listingItem' />
             </div>
-            <div id='listingItem'>
+            <div id='threeCol'>
               <Listing id='listingItem' />
             </div>
-            <div id='listingItem'>
+            <div id='threeCol'>
               <Listing id='listingItem' />
             </div>
-            <div id='listingItem'>
+            <div id='threeCol'>
               <Listing id='listingItem' />
             </div>
           </div>

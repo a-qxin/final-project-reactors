@@ -6,6 +6,7 @@ import PrivateRoute from './pages/PrivateRoute';
 import Home from './pages/Home';
 import NewListing from './pages/NewListing';
 import ViewListing from './pages/ViewListing';
+import Manage from './pages/Manage';
 
 
 const App = () => {
@@ -40,6 +41,11 @@ const App = () => {
           exact 
           path="/viewlisting" 
           component={ViewListing} 
+        />
+        <PrivateRoute 
+          exact 
+          path="/manage" 
+          component={Manage} 
         />
 
         {/* <Route path="/account" component={Account} /> */}
