@@ -31,12 +31,12 @@ const App = () => {
         />
         <PrivateRoute 
           exact 
-          path="/newListing" 
+          path="/newlisting" 
           component={NewListing} 
         />
         <PrivateRoute 
           exact 
-          path="/newListing" 
+          path="/viewlisting" 
           component={ViewListing} 
         />
 
