@@ -8,6 +8,8 @@ import NewListing from './pages/NewListing';
 import ViewListing from './pages/ViewListing';
 import Manage from './pages/Manage';
 import Message from './pages/Message';
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
 
 const App = () => {
   const bg = {
@@ -51,6 +53,16 @@ const App = () => {
           exact 
           path="/message" 
           component={Message} 
+        />
+        <PrivateRoute 
+          exact 
+          path="/signUp" 
+          component={SignUp} 
+        />
+        <PrivateRoute 
+          exact 
+          path="/signIn" 
+          component={SignIn} 
         />
 
         {/* <Route path="/account" component={Account} /> */}
