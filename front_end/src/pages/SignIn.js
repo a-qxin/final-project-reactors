@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import signinguy from '../assets/signinguy.svg';
 
 const SignIn = () => {
@@ -55,7 +56,7 @@ const SignIn = () => {
         <h2>Welcome back to reactorsHub!</h2>
         <h3>Enter your email and password.</h3>
         <br></br>
-        <h4>New to reactorsHub? <a href="#"><u>Click here</u></a></h4>
+        <h4>New to reactorsHub? <Link exact to="/signup"><u>Click here</u></Link></h4>
 
         <div style={fields}>
           <div style={fieldContainer}>

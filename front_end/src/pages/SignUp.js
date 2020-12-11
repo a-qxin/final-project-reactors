@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import signupcat from '../assets/signupcat.svg';
 
 const SignUp = () => {
@@ -54,7 +55,7 @@ const SignUp = () => {
         <h1>New to reactorsHub?</h1>
         <h3>Enter the following details to create an account.</h3>
         <br></br>
-        <h4>Already have an account? <a href="#"><u>Click here</u></a></h4>
+        <h4>Already have an account? <Link exact to='/signin'><u>Click here</u></Link></h4>
 
         <div style={fields}>
           <div style={fieldContainer}>
