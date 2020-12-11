@@ -1,6 +1,5 @@
 import React from 'react';
-
-// import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Listing from './Listing.js';
 
@@ -85,7 +84,7 @@ const Home = () => {
                   <h4 style={titleRightSmallText}>Create an account</h4>
                 </div>
                 <div>
-                  <button className='button'>Sign up</button>
+                  <Link exact to='/signup' className='button'>Sign up</Link>
                 </div>
               </div>
 
@@ -99,7 +98,7 @@ const Home = () => {
                   <h4 style={titleRightSmallText}>Log back in</h4>
                 </div>
                 <div>
-                  <button className='button'>Sign in</button>
+                  <Link exact to='/signin' className='button'>Sign in</Link>
                 </div>
               </div>
             </div>}
