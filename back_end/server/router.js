@@ -4,6 +4,7 @@ const userController = require('../controllers/userController')
 const listingController = require('../controllers/listingController')
 const inquiryController = require('../controllers/inquiryController')
 
+router.get('/', (req,res)=>{res.send('Hello')})
 
 // User related routes
 router.post('/register', userController.register)

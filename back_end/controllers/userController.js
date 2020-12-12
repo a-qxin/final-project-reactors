@@ -77,7 +77,7 @@ exports.register = function(req , res) {
         req.session.user = {username: user.data.username , _id: user.data._id}
         req.session.save(()=>{
             console.log(`Successfully registered user ${user.data.username}`)
-            res.send(`Successfully registered user ${user.data.username}`)
+            res.status(200).send(`Successfully registered user ${user.data.username}`)
         })
     }).catch((regErrors)=>{
         console.log(regErrors)

@@ -2,6 +2,7 @@ const express = require("express");
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 // const csrf = require('csurf')
+const cors = require('cors')
 const markdown = require('marked')
 const sanitizeHTML = require('sanitize-html')
 const app = express();
@@ -43,8 +44,11 @@ const router = require('./router')
 //Make public accessible
 app.use(express.static('public'))
 
-// //Add crsf protection
+//Add crsf protection
 // app.use(csrf())
+
+// Add cors
+app.use(cors())
 
 // app.use(function(req, res, next){
 //   res.locals.csrfToken = req.csrfToken()
