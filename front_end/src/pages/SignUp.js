@@ -5,7 +5,7 @@ let axios = require('axios');
 let qs = require('qs');
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserName, setEmail, setPassword, setConfirmPassword} from '../redux/actions/userActions';
+import { setUserName, setEmail, setPassword, setConfirmPassword, setIsLoggedIn} from '../redux/actions/userActions';
 
 const SignUp = () => {
   const mainContainer = {
@@ -57,7 +57,7 @@ const SignUp = () => {
   const confirmPassword = useSelector(state => state.userReducer.confirmPassword);
 
   function registerUser () {
-    console.log(`REgistering user with \nUsername : ${userName} \nEmail : ${email}`);
+    console.log(`Registering user with \nUsername : ${userName} \nEmail : ${email}`);
 
     // front-end validation stuff
 
@@ -69,7 +69,7 @@ const SignUp = () => {
 
     let config = {
       method: 'post',
-      url: 'http://localhost:5000/register',
+      url: '/register',
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -79,6 +79,10 @@ const SignUp = () => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        console.log(response.status);
+        dispatch(setIsLoggedIn(true));
+        // redirect
+        window.location.href = '/';
       })
       .catch(function (error) {
         console.log(error);

@@ -1,9 +1,9 @@
 const initState = () => ({
-  userName: 'abc',
+  userName: 'johnDoe',
   isLoggedIn: false,
-  email: '',
-  password: '',
-  confirmPassword: '',
+  email: 'johndoe@example.com',
+  password: 'abc123456789',
+  confirmPassword: 'abc123456789',
 });
 
 // keep track of the current app state
