@@ -1,6 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import signupcat from '../assets/signupcat.svg';
+let axios = require('axios');
+let qs = require('qs');
+
+import { useSelector, useDispatch } from 'react-redux';
+import { setUserName, setEmail, setPassword, setConfirmPassword} from '../redux/actions/userActions';
 
 const SignUp = () => {
   const mainContainer = {
@@ -45,6 +50,42 @@ const SignUp = () => {
     width:'300px',
   };
 
+  const dispatch = useDispatch(); // must be combined with an action
+  const userName = useSelector(state => state.userReducer.userName);
+  const email = useSelector(state => state.userReducer.email);
+  const password = useSelector(state => state.userReducer.password);
+  const confirmPassword = useSelector(state => state.userReducer.confirmPassword);
+
+  function registerUser () {
+    console.log(`REgistering user with \nUsername : ${userName} \nEmail : ${email}`);
+
+    // front-end validation stuff
+
+    let data = qs.stringify({
+      'username': userName,
+      'email': email,
+      'password': password 
+    });
+
+    let config = {
+      method: 'post',
+      url: 'http://localhost:5000/register',
+      headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data : data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    // send the request
+  }
+
   return(
     <div style={mainContainer}>
       <img src={signupcat} style={image}/>
@@ -60,24 +101,24 @@ const SignUp = () => {
         <div style={fields}>
           <div style={fieldContainer}>
             <h2 style={fieldTitle}>Name:</h2>
-            <input style={inputField} type='text' name='name' />
+            <input style={inputField} value={userName} onChange={e => dispatch(setUserName(e.target.value))}/>
           </div>
           <div style={fieldContainer}>
             <h2 style={fieldTitle}>Email:</h2>
-            <input style={inputField} type='email' name='email' />
+            <input style={inputField} value={email} onChange={e => dispatch(setEmail(e.target.value))}/>            
           </div>
           <div style={fieldContainer}>
             <h2 style={fieldTitle}>Password:</h2>
-            <input style={inputField} type='password' name='password' />
+            <input style={inputField}  type='password' value={password} onChange={e => dispatch(setPassword(e.target.value))}/>                 
           </div>
           <div style={fieldContainer}>
-            <h2 style={fieldTitle}>Re-Password:</h2>
-            <input style={inputField} type='password' name='password' />
+            <h2 style={fieldTitle}>Confirm Password:</h2>
+            <input style={inputField}  type='password' value={confirmPassword} onChange={e => dispatch(setConfirmPassword(e.target.value))}/>    
           </div>
         </div>
-
-        <button className='yellow-btn'>Sign Up</button>
-
+        {/* <button onClick={() => dispatch(setIsLoggedIn(true))}></button> */}
+        {/* <button id="register-form-btn" className='yellow-btn' onClick={()=> dispatch(register())}>Sign Up</button> */}
+        <button id="register-form-btn" className='yellow-btn' onClick={()=>registerUser()}>Sign Up</button>
       </div>
 
     </div>
