@@ -28,7 +28,6 @@
     "lint": "eslint src/**/*.js",
     "eject": "react-scripts eject"
   },
- 
   "eslintConfig": {
     "extends": "react-app"
   },
