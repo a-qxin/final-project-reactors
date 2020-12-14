@@ -41,7 +41,12 @@ const ViewListing = () => {
   /* React begins here */
   const dispatch = useDispatch();
   const inquiry = useSelector(state => state.inquiryReducer.message);
-  const listing = useSelector(state => state.listingReducer);
+
+  const title = useSelector(state => state.listingReducer.title);
+  const description = useSelector(state => state.listingReducer.description);
+  const status = useSelector(state => state.listingReducer.status);
+  const location = useSelector(state => state.listingReducer.location);
+  const price = useSelector(state => state.listingReducer.price);
 
   function sendInquiry(){
     console.log(`Message sent to seller : ${inquiry}`);
@@ -82,8 +87,8 @@ const ViewListing = () => {
     });
 
     let config = {
-      method: 'get',
-      url: 'http://localhost:5000/listing/getById',
+      method: 'post',
+      url: '/listing/getById',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -112,7 +117,7 @@ const ViewListing = () => {
       <div style={center}>
         <div style={pageContainer}>
 
-          <div><h1>{listing.title}</h1></div>
+          <div><h1>{title}</h1></div>
 
           <div style={{ display: 'flex', justifyContent: 'center', padding: '50px 0', }}>
             <div style={{ width: '600px', margin: 'auto', textAlign: 'center' }}>
@@ -124,29 +129,27 @@ const ViewListing = () => {
             </div>
 
             <div style={verticalHr}></div>
-
-
             <div style={{ width: '700px', margin: 'auto', paddingLeft: '100px' }}>
 
               <div style={fieldContainer}>              
                 <h2 style={fieldTitle}>Description: </h2>
                 
-                <h3>{listing.description}</h3>
+                <h3>{description}</h3>
               </div>
 
               <div style={fieldContainer}>
                 <h2 style={fieldTitle}>Status:</h2>
-                <h2>{listing.status}</h2>
+                <h2>{status}</h2>
               </div>
 
               <div style={fieldContainer}>              
                 <h2 style={fieldTitle}>Location:</h2>
-                <h2>{listing.location}</h2>
+                <h2>{location}</h2>
               </div>
 
               <div style={fieldContainer}>
                 <h2 style={fieldTitle}>Price:</h2>
-                <h2>{listing.price}</h2>
+                <h2>{price}</h2>
               </div>
 
               <div>

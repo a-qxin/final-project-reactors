@@ -67,7 +67,7 @@ const Home = () => {
               </div>
 
               <div style={titleButtonSpacing}>
-                <button className='button' disabled>Create a new listing</button>
+                <button className='button'disabled>Create a new listing</button>
               </div>
 
               <div>

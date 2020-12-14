@@ -36,8 +36,9 @@ const NewListing = () => {
   const inputField = {
     width:'300px',
   };
-  const yearField = {
-    width:'54px'
+  const descriptionField = {
+    width:'100%',
+    height: '100px'
   };
 
   const dispatch = useDispatch(); // must be combined with an action
@@ -74,7 +75,7 @@ const NewListing = () => {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         console.log(response.status);
-        dispatch(setIsLoggedIn(true));
+        // dispatch(setIsLoggedIn(true));
         // redirect
         window.location.href = '/';
       })
@@ -112,12 +113,12 @@ const NewListing = () => {
 
               <div style={fieldContainer}>              
                 <h2 style={fieldTitle}>Description:</h2>
-                <input style={yearField} type='text' name='description' placeholder={'Brand new'} onChange={e => dispatch(setDescription(e.target.value))} />
+                <input style={descriptionField} type='text' name='description' placeholder={'Brand new'} onChange={e => dispatch(setDescription(e.target.value))} />
               </div>
 
               <div style={fieldContainer}>
                 <h2 style={fieldTitle}>Status:</h2>
-                <input style={inputField} type='text' name='status' placeholder={'Active or Inactive'} onChange={e => dispatch(setStatus(e.target.value))} />
+                <input style={inputField} type='text' name='status' placeholder={'Available or Unavailable'} onChange={e => dispatch(setStatus(e.target.value))} />
               </div>
 
               <div style={fieldContainer}>              
