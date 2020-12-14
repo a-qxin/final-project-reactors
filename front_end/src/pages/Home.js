@@ -54,7 +54,7 @@ const Home = () => {
     fontWeight: '500',
   };
 
-  let isLoggedIn = true;
+  let isLoggedIn = false;
 
   return (
     <div>
@@ -111,7 +111,7 @@ const Home = () => {
               <div style={titleRightContainer}>
                 <div style={verticalHr}></div>
 
-                <div style={{textAlign:'start', padding:'80px'}}>
+                <div style={{textAlign:'start', padding:'40px 40px 40px 100px'}}>
                   <h1 style={loggedInText}>Hi Nuke!</h1>
                   <h1 style={loggedInText}>Welcome back!</h1>
                   <div style={{padding:'30px 0 0 0'}}>
