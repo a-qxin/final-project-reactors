@@ -15,20 +15,20 @@ const Manage = () => {
     display: 'flex',
   };
   const messageTitle = {
-    fontWeight:'500',
+    fontWeight: '500',
   };
   const messageText = {
-    fontWeight:'normal',
-    padding:'10px 0',
+    fontWeight: 'normal',
+    padding: '10px 0',
   };
   const newMessageText = {
-    fontWeight:'600',
-    padding:'10px 0'
+    fontWeight: '600',
+    padding: '10px 0'
   };
   const listingsContainer = {
-    width: '1150px', 
-    display: 'flex', 
-    flexWrap: 'wrap', 
+    width: '1150px',
+    display: 'flex',
+    flexWrap: 'wrap',
     margin: '0 auto',
   };
 
@@ -44,7 +44,7 @@ const Manage = () => {
               <h2>Messages</h2>
               <br /><br />
 
-              <div style={{display:'flex', justifyContent:'space-between',}}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', }}>
                 <div id='threeCol'>
                   <h3 style={messageTitle}>Name</h3>
                 </div>
@@ -58,7 +58,7 @@ const Manage = () => {
 
               <hr className='hr' />
 
-              <div style={{display:'flex', fontWeight:'bold'}}>
+              <div onClick={() => window.location.href = '/message'} style={{ display: 'flex', fontWeight: 'bold' }}>
                 <div id='threeCol'>
                   <h3 style={newMessageText}>Rick Harrison</h3>
                 </div>
@@ -72,7 +72,7 @@ const Manage = () => {
 
               <hr className='hr' />
 
-              <div style={{display:'flex', fontWeight:'bold'}}>
+              <div style={{ display: 'flex', fontWeight: 'bold' }}>
                 <div id='threeCol'>
                   <h3 style={messageText}>Elon Musk</h3>
                 </div>
@@ -83,7 +83,7 @@ const Manage = () => {
                   <h3 style={messageText}>Fam! I’ll trade you a SpaceX rocket for this.</h3>
                 </div>
               </div>
-              
+
               <hr className='hr' />
 
             </div>

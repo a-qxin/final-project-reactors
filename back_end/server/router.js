@@ -23,11 +23,10 @@ router.get('/listing/getByAuthor' , listingController.getByAuthor)
 
 
 // Inquiry related routes
-// router.post('/create-inquiry', userController.mustBeLoggedIn, inquiryController.create)
+//router.post('/create-inquiry', userController.mustBeLoggedIn, inquiryController.create)
 router.post('/create-inquiry' ,inquiryController.create)
 router.get('/inquiry' ,userController.mustBeLoggedIn, inquiryController.getById)
-router.get('/create-inquiry', (req, res)=>{
-    res.send('hello')
-})
+router.post('/inquiry/getByAuthor', inquiryController.getById)
+
 
 module.exports = router
