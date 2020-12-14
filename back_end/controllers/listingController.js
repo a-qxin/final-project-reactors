@@ -68,9 +68,9 @@ exports.delete = function(req , res) {
 // Get all listings for author
 exports.getByAuthor = function(req , res) {
     Listing.getByAuthor(req.body.authorId).then(function(listings){
-    res.send(listings)
+        res.send(listings)
     })
     .catch(function(err){
-    res.send(err)
+        res.send(err)
     })
 }
