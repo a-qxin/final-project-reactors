@@ -2,6 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import signinguy from '../assets/signinguy.svg';
 
+let axios = require('axios');
+let qs = require('qs');
+
+import { useSelector, useDispatch } from 'react-redux';
+import { setEmail, setPassword, setIsLoggedIn } from '../redux/actions/userActions';
+
 const SignIn = () => {
   const mainContainer = {
     height: '80vh',
@@ -45,8 +51,62 @@ const SignIn = () => {
     width:'300px',
   };
   
+  const dispatch = useDispatch(); // must be combined with an action
+  const email = useSelector(state => state.userReducer.email);
+  const password = useSelector(state => state.userReducer.password);
 
-  return(
+  function signInUser() {
+    console.log(`Signing in user with \nEmail : ${email}`);
+
+    let data = qs.stringify({
+      'email': email,
+      'password': password 
+    });
+
+    // check if the email exists
+    let config = {
+      method: 'get',
+      url: '/doesEmailExist', // /doesEmailExist/${email} ?
+      data : data
+    };
+
+    // if email doesn't exist throw something?
+
+    axios(config) 
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        console.log(response.status);
+        // dispatch(setIsLoggedIn(true));
+        // redirect
+        // window.location.href = '/';
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    // send the request
+
+    // if email does exist, login
+
+    let config = {
+      method: 'get',
+      url: '/login',
+      data : data
+    };
+
+    axios(config) // axios.get(URL/email)?
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        console.log(response.status);
+        dispatch(setIsLoggedIn(true));
+        // redirect
+        window.location.href = '/';
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  return (
     <div style={mainContainer}>
       <img src={signinguy} style={image}/>
 
@@ -61,15 +121,15 @@ const SignIn = () => {
         <div style={fields}>
           <div style={fieldContainer}>
             <h2 style={fieldTitle}>Email:</h2>
-            <input style={inputField} type='email' name='email' />
+            <input style={inputField} type='email' name='email' onChange={e => dispatch(setEmail(e.target.value))}/>
           </div>
           <div style={fieldContainer}>
             <h2 style={fieldTitle}>Password:</h2>
-            <input style={inputField} type='password' name='password' />
+            <input style={inputField} type='password' name='password' onChange={e => dispatch(setPassword(e.target.value))}/>
           </div>
         </div>
 
-        <button className='yellow-btn'>Sign In</button>
+        <button className='yellow-btn' onClick={()=>signInUser()}>Sign In</button>
 
       </div>
 
