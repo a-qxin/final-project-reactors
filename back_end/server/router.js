@@ -19,6 +19,8 @@ router.post('/create-listing' , userController.mustBeLoggedIn, listingController
 router.post('/listing/update', userController.mustBeLoggedIn , listingController.update)
 router.post('/listing/delete', userController.mustBeLoggedIn , listingController.delete)
 router.get('/listing/getByAuthor' , listingController.getByAuthor)
+router.get('/listing/getAllListings', listingController.getAllListings)
+
 
 
 // Inquiry related routes

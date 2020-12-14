@@ -151,5 +151,11 @@ Listing.getByAuthor = function(authorId){
         {$sort: {createdDate: -1}}
     ])
 }
+
+Listing.getAllListings = function (){
+    return Listing.reusableListingQuery([        
+        {$sort: {createdDate: -1}}
+    ])
+}
       
 module.exports = Listing

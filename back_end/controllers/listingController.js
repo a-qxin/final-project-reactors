@@ -74,3 +74,13 @@ exports.getByAuthor = function(req , res) {
     res.send(err)
     })
 }
+
+// Get all listings send array with all listings on success
+exports.getAllListings = function(req , res) {
+    Listing.getAllListings().then(function(listings){
+        res.send(listings)
+    })
+    .catch(function(err){
+        res.send(err)
+    })
+}
