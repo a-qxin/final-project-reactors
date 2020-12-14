@@ -9,9 +9,10 @@ router.get('/', (req,res)=>{res.send('Hello')})
 // User related routes
 router.post('/register', userController.register)
 router.post('/login', userController.login)
-router.post('/logout', userController.logout)
+router.get('/logout', userController.logout)
 router.post('/doesUsernameExist', userController.doesUsernameExist)
 router.post('/doesEmailExist', userController.doesEmailExist)
+router.get('/getSessionState', userController.getSessionState)
 
 
 // Listing related routes
