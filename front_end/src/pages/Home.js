@@ -111,8 +111,8 @@ const Home = () => {
             <h2>Listings</h2>
           </div>
           <div style={listingsContainer}>
-            <div id='threeCol'>
-              <Listing id='listingItem' />
+            <div id='threeCol'>            
+              <Listing id='listingItem'/>
             </div>
             <div id='threeCol'>
               <Listing id='listingItem' />

@@ -76,14 +76,15 @@ const ViewListing = () => {
   function getListing(){
 
     const listingId = urlParams.get('listingId');
+    console.log(`The listing id is : ${listingId}`);
 
     let data = qs.stringify({
       'listingId' : listingId
     });
 
     let config = {
-      method: 'get',
-      url: 'http://localhost:5000/listing/getById',
+      method: 'post',
+      url: '/listing/getById',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -92,8 +93,10 @@ const ViewListing = () => {
 
     Axios(config)
       .then(function (response){
-        console.log(JSON.stringify(response.data));
+        console.log(response);
         console.log(response.status);
+        // set those state variables
+        
       })
       .catch(function(error) {
         console.log(error);
