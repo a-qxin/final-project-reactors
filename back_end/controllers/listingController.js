@@ -67,7 +67,7 @@ exports.delete = function(req , res) {
 
 // Get all listings for author
 exports.getByAuthor = function(req , res) {
-    Listing.getByAuthor(req.body.authorId).then(function(listings){
+    Listing.getByAuthor(req.body.authorId, req.visitorId).then(function(listings){
     res.send(listings)
     })
     .catch(function(err){
@@ -75,9 +75,21 @@ exports.getByAuthor = function(req , res) {
     })
 }
 
+
+// Get all listings for author
+exports.getById = function(req , res) {
+    Listing.findListingById(req.body.listingId, req.visitorId).then(function(listing){
+        res.send(listing)
+    })
+    .catch(function(err){
+        res.send(err)
+    })
+}
+
 // Get all listings send array with all listings on success
 exports.getAllListings = function(req , res) {
-    Listing.getAllListings().then(function(listings){
+    Listing.getAllListings(req.visitorId).then(function(listings){
+        console.log(listings)
         res.send(listings)
     })
     .catch(function(err){

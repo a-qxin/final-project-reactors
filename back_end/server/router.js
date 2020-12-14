@@ -18,6 +18,7 @@ router.post('/doesEmailExist', userController.doesEmailExist)
 router.post('/create-listing' , userController.mustBeLoggedIn, listingController.create)
 router.post('/listing/update', userController.mustBeLoggedIn , listingController.update)
 router.post('/listing/delete', userController.mustBeLoggedIn , listingController.delete)
+router.post('/listing/getById', listingController.getById)
 router.get('/listing/getByAuthor' , listingController.getByAuthor)
 router.get('/listing/getAllListings', listingController.getAllListings)
 

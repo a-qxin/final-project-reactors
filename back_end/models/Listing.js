@@ -87,6 +87,7 @@ Listing.reusableListingQuery = function(uniqueOperations, visitorId) {
             }
             return listing
         })
+
         resolve(listings)
     })
 }
@@ -145,17 +146,17 @@ Listing.findListingById = function(id, visitorId) {
 }
 
 
-Listing.getByAuthor = function(authorId){
+Listing.getByAuthor = function(authorId,visitorId){
     return Listing.reusableListingQuery([
         {$match: {author: new ObjectID(authorId)}},
         {$sort: {createdDate: -1}}
-    ])
+    ],visitorId)
 }
 
-Listing.getAllListings = function (){
+Listing.getAllListings = function (visitorId){
     return Listing.reusableListingQuery([        
         {$sort: {createdDate: -1}}
-    ])
+    ],visitorId)
 }
       
 module.exports = Listing
