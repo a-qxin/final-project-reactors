@@ -1,8 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import signinguy from '../assets/signinguy.svg';
+let axios = require('axios');
+let qs = require('qs');
+
+import { useSelector, useDispatch } from 'react-redux';
+import { setUserName, setPassword, setIsLoggedIn } from '../redux/actions/userActions';
 
 const SignIn = () => {
+  
+  let history = useHistory(); 
+
   const mainContainer = {
     height: '80vh',
     width: '90vw',
@@ -45,8 +53,39 @@ const SignIn = () => {
     width:'300px',
   };
   
+  const dispatch = useDispatch(); // must be combined with an action
+  const userName = useSelector(state => state.userReducer.userName);
+  const password = useSelector(state => state.userReducer.password);
+  // const isLoggedIn = useSelector(state => state.userReducer.setIsLoggedIn);
 
-  return(
+  function signInUser() {
+    console.log(`Signing in user with \nUserName : ${userName} and password : ${password}`);
+
+    let data = qs.stringify({
+      'username': userName,
+      'password': password 
+    });
+
+    let config = {
+      method: 'post',
+      url: '/login',
+      data : data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        console.log(response.status);
+        dispatch(setIsLoggedIn(true));
+        // redirect
+        history.push('/');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  return (
     <div style={mainContainer}>
       <img src={signinguy} style={image}/>
 
@@ -54,22 +93,22 @@ const SignIn = () => {
 
       <div style={rightContainer}>
         <h2>Welcome back to reactorsHub!</h2>
-        <h3>Enter your email and password.</h3>
+        <h3>Enter your username and password.</h3>
         <br></br>
         <h4>New to reactorsHub? <Link exact to="/signup"><u>Click here</u></Link></h4>
 
         <div style={fields}>
           <div style={fieldContainer}>
-            <h2 style={fieldTitle}>Email:</h2>
-            <input style={inputField} type='email' name='email' />
+            <h2 style={fieldTitle}>Username:</h2>
+            <input style={inputField} type='text' name='username' onChange={e => dispatch(setUserName(e.target.value))}/>
           </div>
           <div style={fieldContainer}>
             <h2 style={fieldTitle}>Password:</h2>
-            <input style={inputField} type='password' name='password' />
+            <input style={inputField} type='password' name='password' onChange={e => dispatch(setPassword(e.target.value))}/>
           </div>
         </div>
 
-        <button className='yellow-btn'>Sign In</button>
+        <button className='yellow-btn' onClick={()=>signInUser()}>Sign In</button>
 
       </div>
 
