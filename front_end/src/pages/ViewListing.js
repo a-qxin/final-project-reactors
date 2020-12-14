@@ -4,7 +4,8 @@ import defaultImage from '../assets/defaultimage.svg';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { makeInquiry } from '../redux/actions/inquiryActions';
-//import Axios from 'axios';
+import Axios from 'axios';
+let qs = require('qs');
 
 const ViewListing = () => {
   const center = {
@@ -36,37 +37,65 @@ const ViewListing = () => {
 
   /* React begins here */
   const dispatch = useDispatch();
-  const message = useSelector(state => state.inquiryReducer.message); 
+  const inquiry = useSelector(state => state.inquiryReducer.message);
+  const listing = useSelector(state => state.listingReducer);
 
   function sendInquiry(){
-    console.log(`Message sent to seller : ${message}`);
+    console.log(`Message sent to seller : ${inquiry}`);
 
-    // let data = qs.stringify({
-    //   'inquiry' : inquiry
-    // });
+    let data = qs.stringify({
+      'inquiry' : inquiry
+    });
 
-    // let config = {
-    //   method: 'post',
-    //   url: '/message',
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //   },
-    //   data: data
-    // };
+    let config = {
+      method: 'post',
+      url: 'http://localhost:5000/listing/getById',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: data
+    };
 
-    // Axios(config)
-    //   .then(function (response){
-    //     console.log(JSON.stringify(response.data));
-    //     console.log(response.status);
-    //     dispatch(makeInquiry(inquiry));
-    //     //redirect
-    //     window.location.href = '/';
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   });
-    // //send the request
+    Axios(config)
+      .then(function (response){
+        console.log(JSON.stringify(response.data));
+        console.log(response.status);
+        dispatch(makeInquiry(inquiry));
+        //redirect
+        window.location.href = '/';
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    //send the request
   }
+
+  function getListing(){
+
+
+
+    let config = {
+      method: 'get',
+      url: 'http://localhost:5000/listing/getById',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+    };
+
+    Axios(config)
+      .then(function (response){
+        console.log(JSON.stringify(response.data));
+        console.log(response.status);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+  React.useEffect( () => {
+    getListing();
+  }, []); 
+
   /* React ends here */
 
   return (
@@ -74,7 +103,8 @@ const ViewListing = () => {
 
       <div style={center}>
         <div style={pageContainer}>
-          <div><h1>Bob&#39;s backyard reactor</h1></div>
+
+          <div><h1>{listing.title}</h1></div>
 
           <div style={{ display: 'flex', justifyContent: 'center', padding: '50px 0', }}>
             <div style={{ width: '600px', margin: 'auto', textAlign: 'center' }}>
@@ -91,23 +121,24 @@ const ViewListing = () => {
             <div style={{ width: '700px', margin: 'auto', paddingLeft: '100px' }}>
 
               <div style={fieldContainer}>              
-                <h2 style={fieldTitle}>Year:</h2>
-                <h2>1986</h2>
+                <h2 style={fieldTitle}>Description: </h2>
+                
+                <h3>{listing.description}</h3>
               </div>
 
               <div style={fieldContainer}>
                 <h2 style={fieldTitle}>Status:</h2>
-                <h2>Active</h2>
+                <h2>{listing.status}</h2>
               </div>
 
               <div style={fieldContainer}>              
                 <h2 style={fieldTitle}>Location:</h2>
-                <h2>Chernobyl, Ukraine</h2>
+                <h2>{listing.location}</h2>
               </div>
 
               <div style={fieldContainer}>
                 <h2 style={fieldTitle}>Price:</h2>
-                <h2>$69,420</h2>
+                <h2>{listing.price}</h2>
               </div>
 
               <div>

@@ -3,7 +3,7 @@ let axios = require('axios');
 let qs = require('qs');
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setTitle, setDescription, setStatus, setLocation, setPrice, setIsLoggedIn} from '../redux/actions/listingActions';
+import { setTitle, setDescription, setStatus, setLocation, setPrice} from '../redux/actions/listingActions';
 
 
 // import Listing from './Listing.js';

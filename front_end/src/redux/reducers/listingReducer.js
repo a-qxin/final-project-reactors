@@ -1,6 +1,6 @@
 const initState = () => ({
   title: 'Bob\'s backyard reactor',
-  description: 'description',
+  description: ' the most awesome thing in the whole world :)',
   status: 'Available',
   location: 'Stalingrad, Russia',
   price: '69,420',
