@@ -8,6 +8,9 @@ import Axios from 'axios';
 let qs = require('qs');
 
 const ViewListing = () => {
+
+  const urlParams = new URLSearchParams(window.location.search);
+
   const center = {
     width: '1300px',
     margin: 'auto',
@@ -44,7 +47,7 @@ const ViewListing = () => {
     console.log(`Message sent to seller : ${inquiry}`);
 
     let data = qs.stringify({
-      'inquiry' : inquiry
+      'listingId' : listingId
     });
 
     let config = {
@@ -72,7 +75,11 @@ const ViewListing = () => {
 
   function getListing(){
 
+    const listingId = urlParams.get('listingId');
 
+    let data = qs.stringify({
+      'listingId' : listingId
+    });
 
     let config = {
       method: 'get',
@@ -80,6 +87,7 @@ const ViewListing = () => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
+      data: data
     };
 
     Axios(config)
