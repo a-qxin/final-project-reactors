@@ -2,6 +2,10 @@ import React from 'react';
 
 import defaultImage from '../assets/defaultimage.svg';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { makeInquiry } from '../redux/actions/inquiryActions';
+//import Axios from 'axios';
+
 const ViewListing = () => {
   const center = {
     width: '1300px',
@@ -29,6 +33,41 @@ const ViewListing = () => {
   const msgBox = {
     width:'500px',
   };
+
+  /* React begins here */
+  const dispatch = useDispatch();
+  const message = useSelector(state => state.inquiryReducer.message); 
+
+  function sendInquiry(){
+    console.log(`Message sent to seller : ${message}`);
+
+    // let data = qs.stringify({
+    //   'inquiry' : inquiry
+    // });
+
+    // let config = {
+    //   method: 'post',
+    //   url: '/message',
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    //   },
+    //   data: data
+    // };
+
+    // Axios(config)
+    //   .then(function (response){
+    //     console.log(JSON.stringify(response.data));
+    //     console.log(response.status);
+    //     dispatch(makeInquiry(inquiry));
+    //     //redirect
+    //     window.location.href = '/';
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
+    // //send the request
+  }
+  /* React ends here */
 
   return (
     <div>
@@ -72,7 +111,7 @@ const ViewListing = () => {
               </div>
 
               <div>
-                <input style={msgBox} type='text' name='inquiry' placeholder={'Write your message...'} />
+                <input style={msgBox} type='text' name='inquiry' placeholder={'Write your message...'} onChange={ e => dispatch(makeInquiry(e.target.value))}/>
               </div>
               
             </div>
@@ -80,7 +119,7 @@ const ViewListing = () => {
 
           <div style={{paddingBottom:'30px'}}>
             <div style={{float:'right'}}>
-              <button className='yellow-btn'>Send message to seller</button>
+              <button className='yellow-btn' onClick={()=>sendInquiry()}>Send message to seller</button>
             </div>
           </div>
 
