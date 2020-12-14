@@ -1,5 +1,6 @@
 const initState = () => ({
   userName: 'johnDoe',
+  userId: '-1',
   isLoggedIn: false,
   email: 'johndoe@example.com',
   password: 'abc123456789',

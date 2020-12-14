@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { makeInquiry } from '../redux/actions/inquiryActions';
+import { useSelector, /*useDispatch*/ } from 'react-redux';
+//import { makeInquiry } from '../redux/actions/inquiryActions';
 import webSocket from '../webSocket';
 import axios from 'axios';
 let qs = require('qs');
@@ -39,18 +39,23 @@ const Message = () => {
     borderRadius: '20px 0 0 20px',
     padding: '16px',
   };
-  const dispatch = useDispatch(); // must be combined with an action
- 
-  const userName = useSelector(state => state.userReducer.message);
-  const LISTING_ID = 3;
-  const [chatMessages, setChatMessages] = React.useState([]);    
+  //const dispatch = useDispatch(); // must be combined with an action
+
+  const userId = useSelector(state => state.userReducer.userId);
+  const LISTING_ID = 5;
+  const RECEIVER_NAME = 'malissa';
+  const RECEIVER_ID = '123';
+
+  const [chatMessages, setChatMessages] = React.useState([]);
   const [inputMessage, setInputMessage] = React.useState('');
   function sendMessage() {
     // front-end validation stuff
 
     let data = qs.stringify({
-      'listingId'  : LISTING_ID,
-      'username': userName,
+      'userId': userId,
+      'receiverId': RECEIVER_ID,
+      'receiverName': RECEIVER_NAME,
+      'listingId': LISTING_ID,
       'message': inputMessage,
     });
 
@@ -69,14 +74,14 @@ const Message = () => {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         console.log(response.status);
-        dispatch(makeInquiry);
+        //dispatch(makeInquiry);
       })
       .catch(function (error) {
         console.log(error);
       });
     // send the request
   }
-  function syncMessages(){
+  function syncMessages() {
     let config = {
       method: 'get',
       url: `/inquiry?listingId=${LISTING_ID}`,
@@ -119,32 +124,15 @@ const Message = () => {
             <h2>Rick Harrison</h2>
           </div>
 
-          <div style={msgBubble}>
-            <h3 style={msgText}>The best I can do is 30k and an old painting</h3>
-          </div>
+          <div>
+            {chatMessages.map((chatMessage, i) => (
+              <div  style= {userId === chatMessage.userId ? replyBubble : msgBubble } key={i}>
+                <h3 style={msgText}>
+                  {chatMessage.message}
+                </h3>
+              </div>
+            ))}
 
-          <div style={replyBubble}>
-            <h3 style={msgText}>How about 50k and an old painting</h3>
-          </div>
-
-          <div style={msgBubble}>
-            <h3 style={msgText}>Deal!</h3>
-          </div>
-          <div style={replyBubble}>
-            <table>
-              <tbody>
-                {chatMessages.map((chatMessage,i) => (
-                  <tr key={i}>
-                    <td style={msgText}>
-                      {chatMessage.userName}
-                    </td>
-                    <td style={msgText}>
-                      {chatMessage.message}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
           <div>
             <div style={{ display: 'flex', padding: '50px 0 0 0', position: 'sticky', bottom: '0' }}>
