@@ -85,7 +85,6 @@ const Home = () => {
     fontWeight: '500',
   };
 
-
   return (
     <div>
       <div>

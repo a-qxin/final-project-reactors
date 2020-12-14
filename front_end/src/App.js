@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Switch, Redirect, useLocation, Link } from 'react-router-dom';
 import PrivateRoute from './pages/PrivateRoute';
 import { useDispatch } from 'react-redux';
@@ -11,15 +12,9 @@ import Manage from './pages/Manage';
 import Message from './pages/Message';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
-import axios from 'axios';
 
 const App = () => {
   const dispatch = useDispatch();
-
-  const bg = {
-    background: '#FDEAC3',
-  };
-
   const { pathname } = useLocation(); 
 
   function getSessionState() {
@@ -44,6 +39,10 @@ const App = () => {
   React.useEffect(() => {
     getSessionState();
   });
+
+  const bg = {
+    background: '#FDEAC3',
+  };
 
   return (
     <div className="App" style={bg}>
@@ -91,11 +90,8 @@ const App = () => {
           path="/signIn" 
           component={SignIn} 
         />
-
-        {/* <Route path="/account" component={Account} /> */}
         <Redirect from="*" to="/" />
         <Home />
-
       </Switch>
     </div>
   );
