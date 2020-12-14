@@ -26,30 +26,35 @@ const Home = () => {
     padding: '10px 0 0 0'
   };
   const titleRightContainer = {
-    width:'500px',
-    display:'flex',
+    width: '500px',
+    display: 'flex',
     verticalAlign: 'center',
-    margin:'auto',
-    textAlign:'center',
+    margin: 'auto',
+    textAlign: 'center',
   };
   const titleRightText = {
-    fontWeight:'500',
-    padding:'0 0 30px 0'
+    fontWeight: '500',
+    padding: '0 0 30px 0'
   };
   const titleRightSmallText = {
-    fontWeight:'400',
-    padding:'0 0 12px 0'
+    fontWeight: '400',
+    padding: '0 0 12px 0'
   };
   const verticalHr = {
     width: '1px',
-    background:'#707070',
+    background: '#707070',
   };
   const listingsContainer = {
-    width: '1150px', 
-    display: 'flex', 
-    flexWrap: 'wrap', 
+    width: '1150px',
+    display: 'flex',
+    flexWrap: 'wrap',
     margin: '0 auto',
   };
+  const loggedInText = {
+    fontWeight: '500',
+  };
+
+  let isLoggedIn = true;
 
   return (
     <div>
@@ -75,7 +80,7 @@ const Home = () => {
               </div>
             </div>
 
-            {<div style={titleRightContainer}>
+            {!isLoggedIn ? (<div style={titleRightContainer}>
               <div>
                 <div>
                   <h2 style={titleRightText}>New to reactorsHub?</h2>
@@ -101,8 +106,22 @@ const Home = () => {
                   <Link exact to='/signin' className='button'>Sign in</Link>
                 </div>
               </div>
-            </div>}
+            </div>
+            ) : (
+              <div style={titleRightContainer}>
+                <div style={verticalHr}></div>
 
+                <div style={{textAlign:'start', padding:'80px'}}>
+                  <h1 style={loggedInText}>Hi Nuke!</h1>
+                  <h1 style={loggedInText}>Welcome back!</h1>
+                  <div style={{padding:'30px 0 0 0'}}>
+                    <Link exact to='/manage' className='button' style={{margin:'0 20px 0 0'}}>Manage (#)</Link>
+                    <Link exact to='/' className='button'>Sign Out</Link>
+                  </div>
+                </div>
+              </div>
+            )}
+            
           </div>
         </div>
 
