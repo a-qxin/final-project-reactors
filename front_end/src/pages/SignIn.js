@@ -1,14 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import signinguy from '../assets/signinguy.svg';
-
 let axios = require('axios');
 let qs = require('qs');
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setEmail, setPassword, setIsLoggedIn } from '../redux/actions/userActions';
+import { setUserName, setPassword, setIsLoggedIn } from '../redux/actions/userActions';
 
 const SignIn = () => {
+  
+  let history = useHistory(); 
+
   const mainContainer = {
     height: '80vh',
     width: '90vw',
@@ -52,54 +54,31 @@ const SignIn = () => {
   };
   
   const dispatch = useDispatch(); // must be combined with an action
-  const email = useSelector(state => state.userReducer.email);
+  const userName = useSelector(state => state.userReducer.userName);
   const password = useSelector(state => state.userReducer.password);
+  // const isLoggedIn = useSelector(state => state.userReducer.setIsLoggedIn);
 
   function signInUser() {
-    console.log(`Signing in user with \nEmail : ${email}`);
+    console.log(`Signing in user with \nUserName : ${userName} and password : ${password}`);
 
     let data = qs.stringify({
-      'email': email,
+      'username': userName,
       'password': password 
     });
 
-    // check if the email exists
     let config = {
-      method: 'get',
-      url: '/doesEmailExist', // /doesEmailExist/${email} ?
-      data : data
-    };
-
-    // if email doesn't exist throw something?
-
-    axios(config) 
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        console.log(response.status);
-        // dispatch(setIsLoggedIn(true));
-        // redirect
-        // window.location.href = '/';
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    // send the request
-
-    // if email does exist, login
-
-    let config = {
-      method: 'get',
+      method: 'post',
       url: '/login',
       data : data
     };
 
-    axios(config) // axios.get(URL/email)?
+    axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         console.log(response.status);
         dispatch(setIsLoggedIn(true));
         // redirect
-        window.location.href = '/';
+        history.push('/');
       })
       .catch(function (error) {
         console.log(error);
@@ -114,14 +93,14 @@ const SignIn = () => {
 
       <div style={rightContainer}>
         <h2>Welcome back to reactorsHub!</h2>
-        <h3>Enter your email and password.</h3>
+        <h3>Enter your username and password.</h3>
         <br></br>
         <h4>New to reactorsHub? <Link exact to="/signup"><u>Click here</u></Link></h4>
 
         <div style={fields}>
           <div style={fieldContainer}>
-            <h2 style={fieldTitle}>Email:</h2>
-            <input style={inputField} type='email' name='email' onChange={e => dispatch(setEmail(e.target.value))}/>
+            <h2 style={fieldTitle}>Username:</h2>
+            <input style={inputField} type='text' name='username' onChange={e => dispatch(setUserName(e.target.value))}/>
           </div>
           <div style={fieldContainer}>
             <h2 style={fieldTitle}>Password:</h2>

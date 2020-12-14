@@ -1,7 +1,8 @@
 import React from 'react';
 import { Switch, Redirect, useLocation, Link } from 'react-router-dom';
-
 import PrivateRoute from './pages/PrivateRoute';
+import { useDispatch } from 'react-redux';
+import { setIsLoggedIn } from './redux/actions/userActions';
 
 import Home from './pages/Home';
 import NewListing from './pages/NewListing';
@@ -10,13 +11,39 @@ import Manage from './pages/Manage';
 import Message from './pages/Message';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+import axios from 'axios';
 
 const App = () => {
+  const dispatch = useDispatch();
+
   const bg = {
     background: '#FDEAC3',
   };
 
   const { pathname } = useLocation(); 
+
+  function getSessionState() {
+    let config = {
+      method: 'get',
+      url: '/getSessionState',
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));        
+        if(response.data.username){
+          console.log(response.data.username);
+          dispatch(setIsLoggedIn(true));
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  React.useEffect(() => {
+    getSessionState();
+  });
 
   return (
     <div className="App" style={bg}>
