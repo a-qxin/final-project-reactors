@@ -15,7 +15,7 @@ exports.create = function(req , res) {
 
 // Get inquiry by id
 exports.getById = function (req, res){
-    Inquiry.getById(req.body.listingId).then((inquiryDoc)=>{
+    Inquiry.getById(req.query.listingId).then((inquiryDoc)=>{
         console.log(inquiryDoc)
         res.send(inquiryDoc)
     }).catch((err)=>{
