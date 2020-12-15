@@ -42,6 +42,7 @@ const ViewListing = () => {
   const dispatch = useDispatch();
   const inquiry = useSelector(state => state.inquiryReducer.message);
 
+  // listing data
   const title = useSelector(state => state.listingReducer.title);
   const description = useSelector(state => state.listingReducer.description);
   const status = useSelector(state => state.listingReducer.status);
@@ -57,6 +58,7 @@ const ViewListing = () => {
 
     let config = {
       method: 'post',
+      //should this be going to the websocket stuff?
       url: 'http://localhost:5000/listing/getById',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -79,7 +81,6 @@ const ViewListing = () => {
   }
 
   function getListing(){
-
     const listingId = urlParams.get('listingId');
 
     let data = qs.stringify({
@@ -87,6 +88,7 @@ const ViewListing = () => {
     });
 
     let config = {
+      // should this be a get instead of post?
       method: 'post',
       url: '/listing/getById',
       headers: {
@@ -99,6 +101,11 @@ const ViewListing = () => {
       .then(function (response){
         console.log(JSON.stringify(response.data));
         console.log(response.status);
+        // set listing with data retrieved
+        response.data.title = this.title,
+        response.data.description = this.description,
+
+        
       })
       .catch(function(error) {
         console.log(error);
