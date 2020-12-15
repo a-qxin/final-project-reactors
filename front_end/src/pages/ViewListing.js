@@ -103,10 +103,8 @@ const ViewListing = () => {
         console.log(response);
         console.log(response.status);
         // set listing with data retrieved
-        response.data.title = this.title,
-        response.data.description = this.description,
-
-        
+        response.data.title = this.title;
+        response.data.description = this.description;
       })
       .catch(function(error) {
         console.log(error);
