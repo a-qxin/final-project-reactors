@@ -78,7 +78,7 @@ const Home = () => {
     background: '#707070',
   };
   const listingsContainer = {
-    width: '1150px',
+    // width: '1150px',
     display: 'flex',
     flexWrap: 'wrap',
     margin: '0 auto',
@@ -163,9 +163,9 @@ const Home = () => {
           </div>
           <div style={listingsContainer}>
 
-            <div>
-              <Listing />
-            </div>
+            {/* <div> */}
+            <Listing />
+            {/* </div> */}
             
 
             

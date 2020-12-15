@@ -13,9 +13,8 @@ const Listing = ({/*listingId*/ }) => {
   const [listings, setListings] = React.useState([]);
   const listingContainer = {
     textAlign: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.4)',
-    margin: '20px',
-    padding: '70px 0 40px 0',
+    margin: '20px 0px',
+    // padding: '70px 0 40px 0',
     borderRadius: '30px',
     // display:'flex',
   };
@@ -64,25 +63,21 @@ const Listing = ({/*listingId*/ }) => {
     webSocket.onmessage = (m) => handleWebSocketListing(m);
   }, []);
   return (
-    <div>
+    <div style={{ width: '70%', margin: '0 auto' }}>
       <div>
-        <div style={{display:'flex', flex:'flexWrap'}}>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>            
           {listings.map((listing, i) => (
-            <div id='threeCol' onClick={() => selectListing(listing)} style={listingContainer} key={i}> <img src={defaultImage} width="150px" alt='defaultImage' /> 
-              <h3 style={listingTitle}>
-                {listing.title}
-              </h3>
+            <div id='threeCol' onClick={() => selectListing(listing)} style={listingContainer} key={i}> 
+              <div style={{backgroundColor: 'rgba(255, 255, 255, 0.4)', margin:'0 20px', padding:'70px 0', borderRadius:'30px'}}>
+                <img src={defaultImage} width="150px" alt='defaultImage' />
+                <h3 style={listingTitle}>
+                  {listing.title}
+                </h3>
+              </div>
             </div>
           ))}
 
         </div>
-        {/* <div style={listingContainer}>
-          <a href="./viewListing"><img src={defaultImage} width="150px" alt='defaultImage' />
-            <div style={listingTitle}>
-              <h3>Smol Reactor</h3>
-            </div>
-          </a>
-        </div>  */}
       </div>
     </div>
   );

@@ -30,12 +30,6 @@ const Manage = () => {
     fontWeight: '600',
     padding: '10px 0'
   };
-  const listingsContainer = {
-    width: '1150px',
-    display: 'flex',
-    flexWrap: 'wrap',
-    margin: '0 auto',
-  };
 
   const userId = useSelector(state => state.userReducer.userId);
   // const authorId = '5fc327197fc6c32afe536c50';
@@ -189,10 +183,8 @@ const Manage = () => {
           <div className='title'>
             <h2>Manage Listings</h2>
           </div>
-          <div style={listingsContainer}>
-            <div id='threeCol'>
-              <Listing id='listingItem' />
-            </div>
+          <div>
+            <Listing id='listingItem' />
           </div>
         </div>
 
