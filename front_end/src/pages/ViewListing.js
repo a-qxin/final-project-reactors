@@ -82,13 +82,17 @@ const ViewListing = () => {
 
   function getListing(){
     const listingId = urlParams.get('listingId');
+    console.log(`The listing id is : ${listingId}`);
 
     let data = qs.stringify({
       'listingId' : listingId
     });
 
     let config = {
+<<<<<<< HEAD
       // should this be a get instead of post?
+=======
+>>>>>>> f7ebcf3d9c48541a34a877fd1adf55b403457de3
       method: 'post',
       url: '/listing/getById',
       headers: {
@@ -99,12 +103,16 @@ const ViewListing = () => {
 
     Axios(config)
       .then(function (response){
-        console.log(JSON.stringify(response.data));
+        console.log(response);
         console.log(response.status);
+<<<<<<< HEAD
         // set listing with data retrieved
         response.data.title = this.title,
         response.data.description = this.description,
 
+=======
+        // set those state variables
+>>>>>>> f7ebcf3d9c48541a34a877fd1adf55b403457de3
         
       })
       .catch(function(error) {
