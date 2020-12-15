@@ -16,6 +16,7 @@ client.on('message', (channel, message) => { // all channels for now
   wss.clients.forEach((client) => {
     client.send(message);
   });
+  
 });
 
 client.subscribe('inquiries');

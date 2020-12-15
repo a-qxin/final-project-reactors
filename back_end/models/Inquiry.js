@@ -11,11 +11,17 @@ Inquiry.prototype.cleanUp = function() {
     //Check type
     if(typeof(this.data.listingId) != "string"){this.data.listingId= ""}
     if(typeof(this.data.message) != "string"){this.data.message= ""}
+    if(typeof(this.data.receiverId) != "string"){this.data.receiverId= ""}
+    if(typeof(this.data.receiverName) != "string"){this.data.receiverName= ""}
+    if(typeof(this.data.userId) != "string"){this.data.userId= ""}
     
     //get rid of any bogus properties and trim whitespace
     this.data = {
         listingId: this.data.listingId,
         message: this.data.message,
+        receiverId: this.data.receiverId, 
+        receiverName: this.data.receiverName,
+        userId: this.data.userId,
     }
 }
 

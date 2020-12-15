@@ -23,16 +23,18 @@ Listing.prototype.validate = function(){
 Listing.prototype.cleanUp = function() {
     //Check type
     if(typeof(this.data.title) != "string"){this.data.title= ""}
-    if(typeof(this.data.category) != "string"){this.data.category= ""}
     if(typeof(this.data.description) != "string"){this.data.description= ""}
+    if(typeof(this.data.status) != "string"){this.data.status= ""}
+    if(typeof(this.data.location) != "string"){this.data.location= ""}
     if(typeof(this.data.price) != "string"){this.data.price= ""}
 
     //get rid of any bogus properties and trim whitespace
     this.data = { 
         author: ObjectID(this.userid),
         title: this.data.title.trim(),
-        category: this.data.category.trim().toLowerCase(),
         description: this.data.description,
+        status: this.data.status,
+        location: this.data.location,
         price: this.data.price,
         createdDate: new Date()
     }
@@ -64,8 +66,9 @@ Listing.reusableListingQuery = function(uniqueOperations, visitorId) {
             {$lookup: {from: "users", localField: "author", foreignField: "_id", as: "authorDocument"}},
             {$project: {
                 title: 1,
-                category: 1,
                 description: 1,
+                status: 1,
+                location: 1,
                 price: 1,
                 createdDate: 1,
                 authorId: "$author",
@@ -84,6 +87,7 @@ Listing.reusableListingQuery = function(uniqueOperations, visitorId) {
             }
             return listing
         })
+
         resolve(listings)
     })
 }
@@ -113,7 +117,7 @@ Listing.dbUpdate = function () {
         this.validate()
 
         if(!this.errors.length){
-            await listingCollection.findOneAndUpdate({_id: new ObjectID(this.requestedPostId)}, {$set: {title: this.data.title, category: this.data.category, description: this.data.description, price: this.data.price}})
+            await listingCollection.findOneAndUpdate({_id: new ObjectID(this.requestedPostId)}, {$set: {title: this.data.title,  description: this.data.description, status: this.data.status, location: this.data.location, price: this.data.price}})
             resolve("success")
         }
         else{
@@ -142,11 +146,17 @@ Listing.findListingById = function(id, visitorId) {
 }
 
 
-Listing.getByAuthor = function(authorId){
+Listing.getByAuthor = function(authorId,visitorId){
     return Listing.reusableListingQuery([
         {$match: {author: new ObjectID(authorId)}},
         {$sort: {createdDate: -1}}
-    ])
+    ],visitorId)
+}
+
+Listing.getAllListings = function (visitorId){
+    return Listing.reusableListingQuery([        
+        {$sort: {createdDate: -1}}
+    ],visitorId)
 }
       
 module.exports = Listing

@@ -26,7 +26,6 @@ exports.doesEmailExist = async function(req, res){
 }
 
 
-
 exports.mustBeLoggedIn = function (req, res, next){
     console.log(req.session.user)
     if(req.session.user){
@@ -94,4 +93,9 @@ exports.ifUserExists = function(req, res, next) {
     }).catch(function() {
         res.render("404")
     })
+}
+
+// return most current session object
+exports.getSessionState = function (req, res, next){
+    res.send(req.session.user)
 }
