@@ -91,6 +91,7 @@ const Message = () => {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         setChatMessages(response.data);
+        console.log(chatMessages);
       })
       .catch(function (error) {
         console.log(error);

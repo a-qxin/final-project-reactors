@@ -1,11 +1,11 @@
 import React from 'react';
 import Listing from './Listing.js';
+import { useHistory } from 'react-router-dom';
 //import { useSelector, /*useDispatch*/ } from 'react-redux';
 //import { makeInquiry } from '../redux/actions/inquiryActions';
 import webSocket from '../webSocket';
 import axios from 'axios';
 let qs = require('qs');
-
 
 const Manage = () => {
   const center = {
@@ -36,10 +36,15 @@ const Manage = () => {
     flexWrap: 'wrap',
     margin: '0 auto',
   };
-  
+
   //const authorId = useSelector(state => state.userReducer.userId);
   const authorId = '5fc327197fc6c32afe536c50';
   const [inquiries, setInquiries] = React.useState([]);
+  let history = useHistory(); 
+
+  function getMessage(listingId) {
+    history.push('/message', { listingId: listingId });
+  }
 
   function showInquiries() {
     let data = qs.stringify({
@@ -49,10 +54,10 @@ const Manage = () => {
     let config = {
       method: 'post',
       url: '/inquiry/getByAuthor',
-      headers: { 
+      headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      data : data
+      data: data
     };
 
     axios(config)
@@ -60,11 +65,13 @@ const Manage = () => {
         console.log(JSON.stringify(response.data));
         console.log(response.status);
         setInquiries(response.data);
+        console.log(inquiries);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
+
   const handleWebSocketInquiries = (rawData) => {
     const data = JSON.parse(rawData.data);
     console.log(data);
@@ -101,23 +108,26 @@ const Manage = () => {
               </div>
 
               <hr className='hr' />
-              <div>
-                {inquiries.map((inquiry, i) => (
-                  <div onClick={() => window.location.href = '/message'} style={{ display: 'flex', fontWeight: 'bold' }} key={i}>
-                    <div id='threeCol'>
-                      <h3 style={newMessageText}>
-                        {inquiry.message}
-                      </h3>
-                    </div>
-                    <div id='threeCol'>
-                      <h3 style={newMessageText}>{inquiry.title}</h3>
-                    </div>
-                    <div id='threeCol'>
-                      <h3 style={newMessageText}>{inquiry.message}</h3>
-                    </div>
+              <div>{inquiries.map((inquiry, i) => (
+                <div onClick={() => getMessage(inquiries.authorId)} style={{ display: 'flex', fontWeight: 'bold' }} key={i}>
+                  <div id='threeCol'>
+                    <h3 style={newMessageText}>
+                      {inquiry.author.username}
+                    </h3>
+                    <hr />
                   </div>
-                ))}
-                <hr className='hr' />
+                  <div id='threeCol'>
+                    <h3 style={newMessageText}>{inquiry.title}</h3>
+                    <hr />
+                  </div>
+                  <div id='threeCol'>
+                    <h3 style={newMessageText}>{inquiry.category}</h3>
+                    <hr />
+                  </div>
+
+                </div>
+              ))}
+
               </div>
 
 
@@ -134,7 +144,7 @@ const Manage = () => {
                 </div>
               </div>
 
-              <hr className='hr' />
+
 
             </div>
 

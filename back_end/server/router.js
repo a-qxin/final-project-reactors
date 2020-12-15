@@ -26,7 +26,7 @@ router.get('/listing/getByAuthor' , listingController.getByAuthor)
 //router.post('/create-inquiry', userController.mustBeLoggedIn, inquiryController.create)
 router.post('/create-inquiry' ,inquiryController.create)
 router.get('/inquiry' ,userController.mustBeLoggedIn, inquiryController.getById)
-router.post('/inquiry/getByAuthor', inquiryController.getById)
+router.post('/inquiry/getByAuthor', inquiryController.getByAuthorId)
 
 
 module.exports = router
