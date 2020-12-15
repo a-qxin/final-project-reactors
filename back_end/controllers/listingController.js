@@ -76,7 +76,7 @@ exports.getByAuthor = function(req , res) {
 }
 
 
-// Get all listings for author
+// Get all listings by Id
 exports.getById = function(req , res) {
     Listing.findListingById(req.body.listingId, req.visitorId).then(function(listing){
         res.send(listing)

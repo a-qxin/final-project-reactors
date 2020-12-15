@@ -89,10 +89,7 @@ const ViewListing = () => {
     });
 
     let config = {
-<<<<<<< HEAD
       // should this be a get instead of post?
-=======
->>>>>>> f7ebcf3d9c48541a34a877fd1adf55b403457de3
       method: 'post',
       url: '/listing/getById',
       headers: {
@@ -105,14 +102,10 @@ const ViewListing = () => {
       .then(function (response){
         console.log(response);
         console.log(response.status);
-<<<<<<< HEAD
         // set listing with data retrieved
         response.data.title = this.title,
         response.data.description = this.description,
 
-=======
-        // set those state variables
->>>>>>> f7ebcf3d9c48541a34a877fd1adf55b403457de3
         
       })
       .catch(function(error) {
