@@ -1,18 +1,17 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import defaultImage from '../assets/defaultimage.svg';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { makeInquiry } from '../redux/actions/inquiryActions';
-import Axios from 'axios';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 let qs = require('qs');
 
 const ViewListing = () => {
 
-  const urlParams = new URLSearchParams(window.location.search);
+  // const urlParams = new URLSearchParams(window.location.search);
 
   const center = {
-    width: '1300px',
     margin: 'auto',
   };
   const pageContainer = {
@@ -25,95 +24,108 @@ const ViewListing = () => {
   const verticalHr = {
     width: '1px',
     background: '#707070',
-    margin:'0 10px',
+    margin: '0 10px',
   };
   const fieldContainer = {
     display: 'flex',
-    margin:'20px 0'
+    margin: '20px 0'
   };
   const fieldTitle = {
-    width:'170px'
+    width: '170px'
   };
   const msgBox = {
-    width:'500px',
+    width: '500px',
   };
 
   /* React begins here */
-  const dispatch = useDispatch();
-  const inquiry = useSelector(state => state.inquiryReducer.message);
+  // const dispatch = useDispatch();
+  let history = useHistory();
 
+  //const inputMessage = useSelector(state => state.inquiryReducer.message);
+  const [inputMessage, setInputMessage] = React.useState('');
   // listing data
   const title = useSelector(state => state.listingReducer.title);
   const description = useSelector(state => state.listingReducer.description);
   const status = useSelector(state => state.listingReducer.status);
   const location = useSelector(state => state.listingReducer.location);
   const price = useSelector(state => state.listingReducer.price);
+  const userName = useSelector(state => state.userReducer.userName);
+  const userId = useSelector(state => state.userReducer.userId);
+  const author = useSelector(state => state.listingReducer.author);
+  const listingId = useSelector(state => state.listingReducer.listingId);
 
-  function sendInquiry(){
-    console.log(`Message sent to seller : ${inquiry}`);
-
+  function sendInquiry() {
+    // front-end validation stuff
+    console.log('this is passed in ' + JSON.stringify(location.state));
     let data = qs.stringify({
-      'listingId' : listingId
+      'userName': userName,
+      'userId': userId,
+      'author': author,
+      'listingId': listingId,
+      'message': inputMessage,
     });
 
     let config = {
       method: 'post',
-      //should this be going to the websocket stuff?
-      url: 'http://localhost:5000/listing/getById',
+      url: '/create-inquiry',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: data
     };
 
-    Axios(config)
-      .then(function (response){
+    setInputMessage('');
+
+    axios(config)
+      .then(function (response) {
         console.log(JSON.stringify(response.data));
         console.log(response.status);
-        dispatch(makeInquiry(inquiry));
-        //redirect
-        window.location.href = '/';
+        history.push('/manage');
+        //dispatch(makeInquiry);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
-    //send the request
+    // send the request
   }
 
-  function getListing(){
-    const listingId = urlParams.get('listingId');
-    console.log(`The listing id is : ${listingId}`);
+  // function getListing() {
+  //   const listingId = urlParams.get('listingId');
+  //   console.log(`The listing id is : ${listingId}`);
 
-    let data = qs.stringify({
-      'listingId' : listingId
-    });
+  //   let data = qs.stringify({
+  //     'listingId': listingId
+  //   });
 
-    let config = {
-      // should this be a get instead of post?
-      method: 'post',
-      url: '/listing/getById',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      data: data
-    };
+  //   let config = {
+  //     // should this be a get instead of post?
+  //     method: 'post',
+  //     url: '/listing/getById',
+  //     headers: {
+  //       'Content-Type': 'application/x-www-form-urlencoded'
+  //     },
+  //     data: data
+  //   };
 
-    Axios(config)
-      .then(function (response){
-        console.log(response);
-        console.log(response.status);
-        // set listing with data retrieved
-        response.data.title = this.title;
-        response.data.description = this.description;
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  }
+  //   Axios(config)
+  //     .then(function (response) {
+  //       console.log(response);
+  //       console.log(response.status);
+  //       // set listing with data retrieved
+  //       response.body.title = title;
+  //       response.body.description = this.description;
+  //       response.body.status = this.status;
+  //       response.body.location = this.location;
+  //       response.body.price = this.price; 
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }
 
-  React.useEffect( () => {
-    getListing();
-  }, []); 
+  // React.useEffect(() => {
+  //   getListing();
+  // }, []);
 
   /* React ends here */
 
@@ -130,16 +142,16 @@ const ViewListing = () => {
               <div>
                 <img src={defaultImage} width="150px" alt='defaultImage' />
               </div>
-              <div style={{paddingTop:'30px'}}>
+              <div style={{ paddingTop: '30px' }}>
               </div>
             </div>
 
             <div style={verticalHr}></div>
             <div style={{ width: '700px', margin: 'auto', paddingLeft: '100px' }}>
 
-              <div style={fieldContainer}>              
+              <div style={fieldContainer}>
                 <h2 style={fieldTitle}>Description: </h2>
-                
+
                 <h3>{description}</h3>
               </div>
 
@@ -148,7 +160,7 @@ const ViewListing = () => {
                 <h2>{status}</h2>
               </div>
 
-              <div style={fieldContainer}>              
+              <div style={fieldContainer}>
                 <h2 style={fieldTitle}>Location:</h2>
                 <h2>{location}</h2>
               </div>
@@ -159,16 +171,17 @@ const ViewListing = () => {
               </div>
 
               <div>
-                <input style={msgBox} type='text' name='inquiry' placeholder={'Write your message...'} onChange={ e => dispatch(makeInquiry(e.target.value))}/>
+                <input style={msgBox} type='text' name='inquiry' placeholder={'Write your message...'} onChange={e => setInputMessage(e.target.value)} />
               </div>
-              
+
             </div>
           </div>
 
-          <div style={{paddingBottom:'30px'}}>
-            <div style={{float:'right'}}>
-              <button className='yellow-btn' onClick={()=>sendInquiry()}>Send message to seller</button>
+          <div style={{ paddingBottom: '30px' }}>
+            <div style={{ float: 'right' }}>
+              <button className='yellow-btn' onClick={() => sendInquiry()}>Send message to seller</button>
             </div>
+
           </div>
 
         </div>
@@ -176,5 +189,66 @@ const ViewListing = () => {
     </div>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export default ViewListing;

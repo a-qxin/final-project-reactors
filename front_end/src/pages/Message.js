@@ -41,21 +41,23 @@ const Message = () => {
   };
   //const dispatch = useDispatch(); // must be combined with an action
 
+  const userName = useSelector(state => state.userReducer.userName);
   const userId = useSelector(state => state.userReducer.userId);
-  const LISTING_ID = 5;
-  const RECEIVER_NAME = 'malissa';
-  const RECEIVER_ID = '123';
+  
+  const author = useSelector(state => state.listingReducer.author);
+  const listingId = useSelector(state => state.listingReducer.listingId);
 
   const [chatMessages, setChatMessages] = React.useState([]);
   const [inputMessage, setInputMessage] = React.useState('');
+  
   function sendMessage() {
     // front-end validation stuff
-
+    console.log('this is passed in ' +  JSON.stringify(location.state));
     let data = qs.stringify({
+      'userName': userName,
       'userId': userId,
-      'receiverId': RECEIVER_ID,
-      'receiverName': RECEIVER_NAME,
-      'listingId': LISTING_ID,
+      'author': author,
+      'listingId': listingId,
       'message': inputMessage,
     });
 
@@ -74,6 +76,7 @@ const Message = () => {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         console.log(response.status);
+
         //dispatch(makeInquiry);
       })
       .catch(function (error) {
@@ -81,10 +84,11 @@ const Message = () => {
       });
     // send the request
   }
+
   function syncMessages() {
     let config = {
       method: 'get',
-      url: `/inquiry?listingId=${LISTING_ID}`,
+      url: `/inquiry?listingId=${listingId}`,
     };
 
     axios(config)
@@ -127,7 +131,7 @@ const Message = () => {
 
           <div>
             {chatMessages.map((chatMessage, i) => (
-              <div  style= {userId === chatMessage.userId ? replyBubble : msgBubble } key={i}>
+              <div  style= {userName === chatMessage.userName ? replyBubble : msgBubble } key={i}>
                 <h3 style={msgText}>
                   {chatMessage.message}
                 </h3>

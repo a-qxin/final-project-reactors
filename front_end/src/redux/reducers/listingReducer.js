@@ -4,6 +4,8 @@ const initState = () => ({
   status: 'Available',
   location: 'Stalingrad, Russia',
   price: '69,420',
+  author: 'sam',
+  listingId: '123'
 });
 
 // keep track of the current app state
@@ -37,6 +39,17 @@ const listingReducer = (state = initState(), action) => {
         ...state, // copy old state
         price: action.price, // input the new price
       };
+    case 'SET_AUTHOR':
+      return {
+        ...state, // copy old state
+        author: action.author, // input the new author
+      };
+    case 'SET_LISTING_ID':
+      return {
+        ...state, // copy old state
+        listingId: action.listingId, // input the new listing id
+      };
+
     case 'USER_SET_LOGGED_IN':
       return {
         ...state,

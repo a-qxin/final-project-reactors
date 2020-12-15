@@ -8,12 +8,9 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
-<<<<<<< HEAD
     "express": "^4.17.1",
     "mongodb": "^3.6.3",
-=======
     "js-cookie": "^2.2.1",
->>>>>>> 67c660621a2d50911bb63bf651e2c7ceeaeb8c75
     "qs": "^6.9.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

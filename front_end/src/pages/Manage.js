@@ -1,7 +1,7 @@
 import React from 'react';
 import Listing from './Listing.js';
 import { useHistory } from 'react-router-dom';
-//import { useSelector, /*useDispatch*/ } from 'react-redux';
+import { useSelector, /*useDispatch*/ } from 'react-redux';
 //import { makeInquiry } from '../redux/actions/inquiryActions';
 import webSocket from '../webSocket';
 import axios from 'axios';
@@ -22,10 +22,10 @@ const Manage = () => {
   const messageTitle = {
     fontWeight: '500',
   };
-  const messageText = {
-    fontWeight: 'normal',
-    padding: '10px 0',
-  };
+  // const messageText = {
+  //   fontWeight: 'normal',
+  //   padding: '10px 0',
+  // };
   const newMessageText = {
     fontWeight: '600',
     padding: '10px 0'
@@ -37,9 +37,10 @@ const Manage = () => {
     margin: '0 auto',
   };
 
-  //const authorId = useSelector(state => state.userReducer.userId);
-  const authorId = '5fc327197fc6c32afe536c50';
+  const userId = useSelector(state => state.userReducer.userId);
+  // const authorId = '5fc327197fc6c32afe536c50';
   const [inquiries, setInquiries] = React.useState([]);
+  const [myInquiries, setMyInquiries] = React.useState([]);
   let history = useHistory(); 
 
   function getMessage(listingId) {
@@ -48,7 +49,8 @@ const Manage = () => {
 
   function showInquiries() {
     let data = qs.stringify({
-      'authorId': authorId,
+      'userId': userId,
+      // 'authorId': authorId,
     });
 
     let config = {
@@ -71,15 +73,42 @@ const Manage = () => {
         console.log(error);
       });
   }
+  
+  function showMyInquiries() {
+    let data = qs.stringify({
+      'userId': userId,
+    });
 
+    let config = {
+      method: 'post',
+      url: '/inquiry/getByUserId',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        console.log(response.status);
+        setMyInquiries(response.data);
+  
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   const handleWebSocketInquiries = (rawData) => {
     const data = JSON.parse(rawData.data);
     console.log(data);
     showInquiries();
+    showMyInquiries();
   };
 
   React.useEffect(() => {
     showInquiries();
+    showMyInquiries();
     webSocket.onmessage = (inq) => handleWebSocketInquiries(inq);
   }, []);
 
@@ -121,7 +150,7 @@ const Manage = () => {
                     <hr />
                   </div>
                   <div id='threeCol'>
-                    <h3 style={newMessageText}>{inquiry.category}</h3>
+                    <h3 style={newMessageText}>{inquiry.message}</h3>
                     <hr />
                   </div>
 
@@ -129,22 +158,27 @@ const Manage = () => {
               ))}
 
               </div>
+              <div>{myInquiries.map((inquiry, i) => (
+                <div onClick={() => getMessage(myInquiries.authorId)} style={{ display: 'flex', fontWeight: 'bold' }} key={i}>
+                  <div id='threeCol'>
+                    <h3 style={newMessageText}>
+                      {myInquiry.author.username}
+                    </h3>
+                    <hr />
+                  </div>
+                  <div id='threeCol'>
+                    <h3 style={newMessageText}>{inquiry.title}</h3>
+                    <hr />
+                  </div>
+                  <div id='threeCol'>
+                    <h3 style={newMessageText}>{inquiry.message}</h3>
+                    <hr />
+                  </div>
 
+                </div>
+              ))}
 
-
-              <div style={{ display: 'flex', fontWeight: 'bold' }}>
-                <div id='threeCol'>
-                  <h3 style={messageText}>Elon Musk</h3>
-                </div>
-                <div id='threeCol'>
-                  <h3 style={messageText}>12/01/20</h3>
-                </div>
-                <div id='threeCol'>
-                  <h3 style={messageText}>Fam! I’ll trade you a SpaceX rocket for this.</h3>
-                </div>
               </div>
-
-
 
             </div>
 

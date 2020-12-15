@@ -11,16 +11,14 @@ Inquiry.prototype.cleanUp = function() {
     //Check type
     if(typeof(this.data.listingId) != "string"){this.data.listingId= ""}
     if(typeof(this.data.message) != "string"){this.data.message= ""}
-    if(typeof(this.data.receiverId) != "string"){this.data.receiverId= ""}
-    if(typeof(this.data.receiverName) != "string"){this.data.receiverName= ""}
+    if(typeof(this.data.author) != "string"){this.data.author= ""}
     if(typeof(this.data.userId) != "string"){this.data.userId= ""}
     
     //get rid of any bogus properties and trim whitespace
     this.data = {
         listingId: this.data.listingId,
         message: this.data.message,
-        receiverId: this.data.receiverId, 
-        receiverName: this.data.receiverName,
+        author: this.data.author,
         userId: this.data.userId,
     }
 }
@@ -72,5 +70,24 @@ Inquiry.getById = function (listingId){
         });
     })
 }
+
+
+Inquiry.getByUserId = function (userId){
+    return new Promise(async (resolve, reject)=> {
+        if(typeof(userId) != "string"){
+            reject()
+            return
+        }        
+
+        // Find all matching documents
+        inquiryCollection.find({userId : userId}).toArray(function(err, inquiries) {
+            if (err) {
+                reject(err)
+            }
+            resolve(inquiries)
+        });
+    })
+}
+
 
 module.exports = Inquiry

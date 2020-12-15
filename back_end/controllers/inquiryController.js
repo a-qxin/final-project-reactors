@@ -25,7 +25,7 @@ exports.getById = function (req, res){
     })
 }
 
-// Get inquiry by id
+// Get inquiry by id 
 exports.getByAuthorId = function (req, res){
     console.log('Get by author id function endpoint is called.')
     console.log(req.body.authorId)
@@ -36,3 +36,4 @@ exports.getByAuthorId = function (req, res){
         res.send(err)
     })
 }
+

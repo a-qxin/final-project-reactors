@@ -8,14 +8,15 @@ import Listing from './Listing.js';
 
 const Home = () => {
 
-  let history = useHistory(); 
+  let history = useHistory();
   const dispatch = useDispatch(); // must be combined with an action
-
-  function signOut () {
+  const userId = useSelector(state => state.userReducer.userName);
+  
+  function signOut() {
     let config = {
       method: 'get',
       url: '/logout',
-      headers: { 
+      headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     };
@@ -31,8 +32,9 @@ const Home = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }  
-  
+  }
+
+
   const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
 
   const center = {
@@ -101,12 +103,8 @@ const Home = () => {
               </div>
 
               <div style={titleButtonSpacing}>
-<<<<<<< HEAD
-                <button className='button'disabled>Create a new listing</button>
-=======
-                {!isLoggedIn ? (<button className='button' disabled>Create a new listing</button>) : 
+                {!isLoggedIn ? (<button className='button' disabled>Create a new listing</button>) :
                   (<Link className='button' to='/newlisting'>Create a new listing</Link>)}
->>>>>>> 67c660621a2d50911bb63bf651e2c7ceeaeb8c75
               </div>
 
               {!isLoggedIn ? (<div>
@@ -145,17 +143,17 @@ const Home = () => {
               <div style={titleRightContainer}>
                 <div style={verticalHr}></div>
 
-                <div style={{textAlign:'start', padding:'40px 40px 40px 100px'}}>
-                  <h1 style={loggedInText}>Hi Nuke!</h1>
+                <div style={{ textAlign: 'start', padding: '40px 40px 40px 100px' }}>
+                  <h1 style={loggedInText}> Hello {userId},</h1>
                   <h1 style={loggedInText}>Welcome back!</h1>
-                  <div style={{display:'flex', padding:'20px 0 0 0'}}>
-                    <Link exact to='/manage' className='button' style={{margin:'0 10px 0 0'}}>Manage (#)</Link>
-                    <button onClick={()=>signOut()} className='button'>Sign Out</button>
+                  <div style={{ display: 'flex', padding: '20px 0 0 0' }}>
+                    <Link exact to='/manage' className='button' style={{ margin: '0 10px 0 0' }}>Manage (#)</Link>
+                    <button onClick={() => signOut()} className='button'>Sign Out</button>
                   </div>
                 </div>
               </div>
             )}
-            
+
           </div>
         </div>
 
@@ -164,18 +162,13 @@ const Home = () => {
             <h2>Listings</h2>
           </div>
           <div style={listingsContainer}>
-            <div id='threeCol'>            
-              <Listing id='listingItem'/>
+
+            <div>
+              <Listing />
             </div>
-            <div id='threeCol'>
-              <Listing id='listingItem' />
-            </div>
-            <div id='threeCol'>
-              <Listing id='listingItem' />
-            </div>
-            <div id='threeCol'>
-              <Listing id='listingItem' />
-            </div>
+            
+
+            
           </div>
         </div>
 
