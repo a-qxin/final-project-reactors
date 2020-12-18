@@ -138,7 +138,7 @@ const ViewListing = () => {
           <div><h1>{title}</h1></div>
 
           <div style={{ display: 'flex', justifyContent: 'center', padding: '50px 0', }}>
-            <div style={{ width: '600px', margin: 'auto', textAlign: 'center' }}>
+            <div style={{ margin: 'auto', textAlign: 'center' }}>
               <div>
                 <img src={defaultImage} width="150px" alt='defaultImage' />
               </div>
@@ -147,12 +147,11 @@ const ViewListing = () => {
             </div>
 
             <div style={verticalHr}></div>
-            <div style={{ width: '700px', margin: 'auto', paddingLeft: '100px' }}>
+            <div style={{ margin: 'auto', paddingLeft: '100px' }}>
 
               <div style={fieldContainer}>
                 <h2 style={fieldTitle}>Description: </h2>
-
-                <h3>{description}</h3>
+                <h2>{description}</h2>
               </div>
 
               <div style={fieldContainer}>
@@ -167,7 +166,7 @@ const ViewListing = () => {
 
               <div style={fieldContainer}>
                 <h2 style={fieldTitle}>Price:</h2>
-                <h2>{price}</h2>
+                <h2>${price}</h2>
               </div>
 
               <div>

@@ -18,7 +18,7 @@ const NewListing = () => {
     // background: '#fef3da',
     background: 'rgba(255, 255, 255, 0.4)',
     margin: '0 0 140px 0',
-    padding: '60px 60px',
+    padding: '60px 150px 60px 60px',
     borderRadius: '40px',
   };
   const verticalHr = {
@@ -31,14 +31,19 @@ const NewListing = () => {
     margin:'20px 0'
   };
   const fieldTitle = {
-    width:'170px'
+    width:'280px'
   };
   const inputField = {
-    width:'300px',
+    // width:'300px',
+    width:'100%',
   };
   const descriptionField = {
     width:'100%',
-    height: '100px'
+    // height: '100px',
+    // padding:'100px',
+    // lineHeight:'40%'
+    padding: '10px 0 100px 10px',
+    // margin: '0',
   };
 
   const dispatch = useDispatch(); // must be combined with an action
@@ -116,7 +121,7 @@ const NewListing = () => {
 
               <div style={fieldContainer}>              
                 <h2 style={fieldTitle}>Description:</h2>
-                <input style={descriptionField} type='text' name='description' placeholder={'Brand new'} onChange={e => dispatch(setDescription(e.target.value))} />
+                <input id='descriptionField' style={descriptionField} type='text' name='description' placeholder={'Brand new'} onChange={e => dispatch(setDescription(e.target.value))} />
               </div>
 
               <div style={fieldContainer}>
@@ -131,7 +136,7 @@ const NewListing = () => {
 
               <div style={fieldContainer}>
                 <h2 style={fieldTitle}>Price: $</h2>
-                <input style={inputField} type='text' name='price' placeholder={'$69,420'} onChange={e => dispatch(setPrice(e.target.value))} />
+                <input style={inputField} type='text' name='price' placeholder={'69420'} onChange={e => dispatch(setPrice(e.target.value))} />
               </div>
             </div>
 
