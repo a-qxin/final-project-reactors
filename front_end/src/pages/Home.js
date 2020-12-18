@@ -38,7 +38,6 @@ const Home = () => {
   const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
 
   const center = {
-    width: '1300px',
     margin: 'auto',
   };
   const heroContainer = {
