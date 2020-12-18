@@ -52,7 +52,8 @@ const NewListing = () => {
   const status = useSelector(state => state.listingReducer.status);
   const location = useSelector(state => state.listingReducer.location);
   const price = useSelector(state => state.listingReducer.price);
-
+  const author = useSelector(state => state.userReducer.userId);
+  const listingId = Math.floor((Math.random() * 1000000) + 1);;
 
   function createListing () {
     console.log(`Creating new listing with \nListin title : ${title} \nlocation : ${location} \nprice : ${price}`);
@@ -65,6 +66,8 @@ const NewListing = () => {
       status: status,
       location: location,
       price: price,
+      author: author,
+      listingId: listingId,
     });
 
     let config = {

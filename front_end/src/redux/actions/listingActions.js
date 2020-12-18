@@ -22,3 +22,13 @@ export const setPrice = (price) => ({
   type: 'SET_PRICE',
   price,
 });
+
+export const setAuthor = (author) => ({
+  type: 'SET_AUTHOR',
+  author,
+});
+
+export const setListingId = (listingId) => ({
+  type: 'SET_LISTING_ID',
+  listingId,
+});
