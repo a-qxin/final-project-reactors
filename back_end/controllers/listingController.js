@@ -67,12 +67,13 @@ exports.delete = function (req, res) {
 
 // Get all listings for author
 exports.getByAuthor = function (req, res) {
-    Listing.getByAuthor(req.body.authorId).then(function (listings) {
+    Listing.getByAuthor(req.session.user).then(function (listings) {
+        console.log(listings)
         res.send(listings)
     })
-        .catch(function (err) {
-            res.send(err)
-        })
+    .catch(function (err) {
+        res.send(err)
+    })
 }
 
 

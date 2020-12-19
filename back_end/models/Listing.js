@@ -81,7 +81,6 @@ Listing.reusableListingQuery = function(uniqueOperations, visitorId) {
         //Clean up author property in each listing object
         listings = listings.map((listing)=>{
             listing.isVisitorOwner = listing.authorId.equals(visitorId)
-            listing.authorId = undefined
             console.log(listing)
             listing.author = {
                 username: listing.author.username,
@@ -146,10 +145,10 @@ Listing.findListingById = function(id, visitorId) {
     })
 }
 
-
 Listing.getByAuthor = function(authorId,visitorId){
+    console.log('In get by author function',authorId)
     return Listing.reusableListingQuery([
-        {$match: {author: new ObjectID(authorId)}},
+        {$match: {author: authorId}},
         {$sort: {createdDate: -1}}
     ],visitorId)
 }
@@ -159,5 +158,5 @@ Listing.getAllListings = function (visitorId){
         {$sort: {createdDate: -1}}
     ],visitorId)
 }
-      
+  
 module.exports = Listing
