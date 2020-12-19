@@ -28,3 +28,24 @@ export const setConfirmPassword = (confirmPassword) => ({
   type: 'SET_CONFIRM_PASSWORD',
   confirmPassword,
 });
+
+export const setSeeCreateListing = (seeCreateListing) => ({
+  type: 'SET_SEE_CREATE_LISTING',
+  seeCreateListing,
+});
+
+export const setSeeSignUp = (seeSignUp) => ({
+  type: 'SET_SEE_SIGNUP',
+  seeSignUp,
+});
+
+export const setSeeSignIn = (seeSignIn) => ({
+  type: 'SET_SEE_SIGNIN',
+  seeSignIn,
+});
+
+
+export const setSeeManage = (seeManage) => ({
+  type: 'SET_SEE_MANAGE',
+  seeManage,
+});

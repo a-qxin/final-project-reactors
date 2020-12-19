@@ -5,7 +5,8 @@ const initState = () => ({
   location: 'Stalingrad, Russia',
   price: '69,420',
   author: 'sam',
-  listingId: '123'
+  listingId: '123',
+  seeViewListing: false,
 });
 
 // keep track of the current app state
@@ -13,7 +14,7 @@ const initState = () => ({
 const listingReducer = (state = initState(), action) => {
   // all actions have a type
   console.log(action);
-  switch(action.type){
+  switch (action.type) {
     case 'SET_TITLE':
       return {
         ...state, // copy old state
@@ -55,6 +56,13 @@ const listingReducer = (state = initState(), action) => {
         ...state,
         isLoggedIn: action.isLoggedIn,
       };
+    case 'SET_SEE_VIEW_LISTING':
+      return {
+        ...state,
+        seeViewListing: action.seeViewListing,
+      };
+
+
     default:
       // we don't want to modify state, ignore action
       return state;

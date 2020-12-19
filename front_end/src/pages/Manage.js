@@ -35,7 +35,7 @@ const Manage = () => {
   // const authorId = '5fc327197fc6c32afe536c50';
   const [inquiries, setInquiries] = React.useState([]);
   const [myInquiries, setMyInquiries] = React.useState([]);
-  let history = useHistory(); 
+  let history = useHistory();
 
   function getMessage(listingId) {
     history.push('/message', { listingId: listingId });
@@ -67,7 +67,7 @@ const Manage = () => {
         console.log(error);
       });
   }
-  
+
   function showMyInquiries() {
     let data = qs.stringify({
       'userId': userId,
@@ -87,7 +87,7 @@ const Manage = () => {
         console.log(JSON.stringify(response.data));
         console.log(response.status);
         setMyInquiries(response.data);
-  
+
       })
       .catch(function (error) {
         console.log(error);
@@ -133,42 +133,39 @@ const Manage = () => {
               <hr className='hr' />
               <div>{inquiries.map((inquiry, i) => (
                 <div onClick={() => getMessage(inquiries.userId)} style={{ display: 'flex', fontWeight: 'bold' }} key={i}>
-                  <div id='threeCol'>
+                  {/* <div id='threeCol'>
                     <h3 style={newMessageText}>
                       {inquiry.userName}
                     </h3>
-                    <hr />
+
                   </div>
-                  {/* <div id='threeCol'>
+
+                  <div id='threeCol'>
                     <h3 style={newMessageText}>{inquiry.title}</h3>
                     <hr />
-                  </div> */}
+                  </div>
                   <div id='threeCol'>
                     <h3 style={newMessageText}>{inquiry.message}</h3>
                     <hr />
                   </div>
-
+                  <hr /> */}
+                  <div style={{ display: 'flex', flexWrap: 'wrap' }} className="row">
+                    <div id='threeCol' className="col" style={newMessageText}> {inquiry.userId} </div>
+                    <div id='threeCol' className="col" style={newMessageText} >{inquiry.title}</div>
+                    <div id='threeCol' className="col" style={newMessageText}>{inquiry.message}</div>
+                  </div>
                 </div>
               ))}
 
               </div>
               <div>{myInquiries.map((inquiry, i) => (
                 <div onClick={() => getMessage(myInquiries.userId)} style={{ display: 'flex', fontWeight: 'bold' }} key={i}>
-                  <div id='threeCol'>
-                    <h3 style={newMessageText}>
-                      {inquiry.author}
-                    </h3>
-                    <hr />
+                  <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent:'center' }} className="row">
+                    <div id='threeCol' className="col" style={newMessageText}> {inquiry.author} </div>
+                    <div id='threeCol' className="col" style={newMessageText} > {inquiry.title}</div>
+                    <div id='threeCol' className="col" style={newMessageText}>{inquiry.message}</div>
                   </div>
-                  {/* <div id='threeCol'>
-                    <h3 style={newMessageText}>{inquiry.title}</h3>
-                    <hr />
-                  </div> */}
-                  <div id='threeCol'>
-                    <h3 style={newMessageText}>{inquiry.message}</h3>
-                    <hr />
-                  </div>
-
+                  <hr className='hr' />
                 </div>
               ))}
 

@@ -32,3 +32,9 @@ export const setListingId = (listingId) => ({
   type: 'SET_LISTING_ID',
   listingId,
 });
+
+export const setSeeViewListing = (seeViewListing) => ({
+  type: 'SET_SEE_VIEW_LISTING',
+  seeViewListing,
+});
+

@@ -5,6 +5,10 @@ const initState = () => ({
   email: 'johndoe@example.com',
   password: 'abc123456789',
   confirmPassword: 'abc123456789',
+  seeCreateListing: false,
+  seeSignUp: false,
+  seeSignIn: false,
+  seeManage: false,
 });
 
 // keep track of the current app state
@@ -41,6 +45,26 @@ const userReducer = (state = initState(), action) => {
       return {
         ...state,
         confirmPassword: action.confirmPassword,
+      };
+    case 'SET_SEE_CREATE_LISTING':
+      return {
+        ...state,
+        seeCreateListing: action.seeCreateListing,
+      };
+    case 'SET_SEE_SIGNUP':
+      return {
+        ...state, // copy old state
+        seeSignUp: action.seeSignUp, // input the new title
+      };
+    case 'SET_SEE_SIGNIN':
+      return {
+        ...state, // copy old state
+        seeSignIn: action.seeSignIn, // input the new title
+      };
+    case 'SET_SEE_MANAGE':
+      return {
+        ...state, // copy old state
+        seeManage: action.seeManage, // input the new title
       };
     default:
       // we don't want to modify state, ignore action

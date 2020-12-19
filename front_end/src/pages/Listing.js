@@ -1,21 +1,22 @@
 import React from 'react';
 import defaultImage from '../assets/defaultimage.svg';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setTitle, setDescription, setStatus, setLocation, setPrice, setListingId} from '../redux/actions/listingActions';
+import { setTitle, setDescription, setStatus, setLocation, setPrice, setListingId, setSeeViewListing } from '../redux/actions/listingActions';
 import webSocket from '../webSocket';
 import axios from 'axios';
 
 const Listing = ({/*listingId*/ }) => {
-  let history = useHistory(); 
+  // let history = useHistory(); 
   const dispatch = useDispatch();
-  
+
   const [listings, setListings] = React.useState([]);
   const listingContainer = {
     textAlign: 'center',
     margin: '20px 0px',
     // padding: '70px 0 40px 0',
     borderRadius: '30px',
+    cursor: 'pointer',
     // display:'flex',
   };
   const listingTitle = {
@@ -48,16 +49,16 @@ const Listing = ({/*listingId*/ }) => {
       });
   }
 
-  
-  function selectListing(listing){
+
+  function selectListing(listing) {
     dispatch(setTitle(listing.title));
     dispatch(setDescription(listing.description));
     dispatch(setStatus(listing.status));
     dispatch(setLocation(listing.location));
     dispatch(setPrice(listing.price));
     dispatch(setListingId(listing._id));
-    
-    history.push('/viewListing');
+    dispatch(setSeeViewListing(true));
+    //history.push('/viewListing');
   }
   React.useEffect(() => {
     getListings();
@@ -66,10 +67,10 @@ const Listing = ({/*listingId*/ }) => {
   return (
     <div style={{ width: '70%', margin: '0 auto' }}>
       <div>
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>            
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           {listings.map((listing, i) => (
-            <div id='threeCol' onClick={() => selectListing(listing)} style={listingContainer} key={i}> 
-              <div style={{backgroundColor: 'rgba(255, 255, 255, 0.4)', margin:'0 20px', padding:'70px 0', borderRadius:'30px'}}>
+            <div id='threeCol' onClick={() => {  selectListing(listing); dispatch(setSeeViewListing(true)); }} style={listingContainer} key={i}>
+              <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.4)', margin: '0 20px', padding: '70px 0', borderRadius: '30px' }}>
                 <img src={defaultImage} width="150px" alt='defaultImage' />
                 <h3 style={listingTitle}>
                   {listing.title}

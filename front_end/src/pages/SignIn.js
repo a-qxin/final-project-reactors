@@ -1,21 +1,21 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+//import { Link, useHistory } from 'react-router-dom';
 import signinguy from '../assets/signinguy.svg';
 let axios = require('axios');
 let qs = require('qs');
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserName, setPassword, setIsLoggedIn } from '../redux/actions/userActions';
+import { setUserName, setPassword, setIsLoggedIn, setSeeSignUp, setSeeSignIn } from '../redux/actions/userActions';
 
 const SignIn = () => {
-  
-  let history = useHistory(); 
+
+  // let history = useHistory(); 
 
   const mainContainer = {
     height: '80vh',
     width: '90vw',
-    display:'flex',
-    margin:'auto',
+    display: 'flex',
+    margin: 'auto',
   };
 
   const image = {
@@ -25,7 +25,7 @@ const SignIn = () => {
 
   const verticalHr = {
     width: '1px',
-    background:'#707070',
+    background: '#707070',
   };
 
   const rightContainer = {
@@ -44,18 +44,19 @@ const SignIn = () => {
 
   const fieldContainer = {
     display: 'flex',
-    margin:'20px 0'
+    margin: '20px 0'
   };
   const fieldTitle = {
-    width:'225px'
+    width: '225px'
   };
   const inputField = {
-    width:'300px',
+    width: '300px',
   };
-  
+
   const dispatch = useDispatch(); // must be combined with an action
   const userName = useSelector(state => state.userReducer.userName);
   const password = useSelector(state => state.userReducer.password);
+
   // const isLoggedIn = useSelector(state => state.userReducer.setIsLoggedIn);
 
   function signInUser() {
@@ -63,13 +64,13 @@ const SignIn = () => {
 
     let data = qs.stringify({
       'username': userName,
-      'password': password 
+      'password': password
     });
 
     let config = {
       method: 'post',
       url: '/login',
-      data : data
+      data: data
     };
 
     axios(config)
@@ -77,8 +78,10 @@ const SignIn = () => {
         console.log(JSON.stringify(response.data));
         console.log(response.status);
         dispatch(setIsLoggedIn(true));
+        dispatch(setSeeSignIn(false));
+        dispatch(setSeeSignUp(false));
         // redirect
-        history.push('/');
+        //  history.push('/');
       })
       .catch(function (error) {
         console.log(error);
@@ -87,7 +90,7 @@ const SignIn = () => {
 
   return (
     <div style={mainContainer}>
-      <img src={signinguy} style={image}/>
+      <img src={signinguy} style={image} />
 
       <div style={verticalHr}></div>
 
@@ -95,20 +98,20 @@ const SignIn = () => {
         <h2>Welcome back to reactorsHub!</h2>
         <h3>Enter your username and password.</h3>
         <br></br>
-        <h4>New to reactorsHub? <Link exact to="/signup"><u>Click here</u></Link></h4>
+        <h4>New to reactorsHub? <button onClick={() => { dispatch(setSeeSignUp(true)); dispatch(setSeeSignIn(false)); }}><u>Click here</u></button></h4>
 
         <div style={fields}>
           <div style={fieldContainer}>
             <h2 style={fieldTitle}>Username:</h2>
-            <input style={inputField} type='text' name='username' onChange={e => dispatch(setUserName(e.target.value))}/>
+            <input style={inputField} type='text' name='username' onChange={e => dispatch(setUserName(e.target.value))} />
           </div>
           <div style={fieldContainer}>
             <h2 style={fieldTitle}>Password:</h2>
-            <input style={inputField} type='password' name='password' onChange={e => dispatch(setPassword(e.target.value))}/>
+            <input style={inputField} type='password' name='password' onChange={e => dispatch(setPassword(e.target.value))} />
           </div>
         </div>
 
-        <button className='yellow-btn' onClick={()=>signInUser()}>Sign In</button>
+        <button className='yellow-btn' onClick={() => signInUser()}>Sign In</button>
 
       </div>
 

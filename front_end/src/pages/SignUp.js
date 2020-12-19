@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import signupcat from '../assets/signupcat.svg';
 let axios = require('axios');
 let qs = require('qs');
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserName, setEmail, setPassword, setConfirmPassword, setIsLoggedIn } from '../redux/actions/userActions';
+import { setUserName, setEmail, setPassword, setConfirmPassword, setIsLoggedIn, setSeeSignIn, setSeeSignUp } from '../redux/actions/userActions';
 
 const SignUp = () => {
   const mainContainer = {
@@ -81,9 +81,8 @@ const SignUp = () => {
         console.log(JSON.stringify(response.data));
         console.log(response.status);
         dispatch(setIsLoggedIn(true));
-        // redirect
-        // history.push('/');
-        window.location.href = '/';
+        dispatch(setSeeSignIn(false));
+        dispatch(setSeeSignUp(false));
       })
       .catch(function (error) {
         console.log(error);
@@ -101,7 +100,7 @@ const SignUp = () => {
         <h1>New to reactorsHub?</h1>
         <h3>Enter the following details to create an account.</h3>
         <br></br>
-        <h4>Already have an account? <Link exact to='/signin'><u>Click here</u></Link></h4>
+        <h4>Already have an account? <button  onClick={() => {dispatch(setSeeSignUp(false)); dispatch(setSeeSignIn(true));}}><u>Click here</u></button></h4>
 
         <div style={fields}>
           <div style={fieldContainer}>

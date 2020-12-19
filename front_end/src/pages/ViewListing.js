@@ -1,9 +1,11 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 
 import defaultImage from '../assets/defaultimage.svg';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSeeManage } from '../redux/actions/userActions';
+import { setSeeViewListing } from '../redux/actions/listingActions';
 import axios from 'axios';
 let qs = require('qs');
 
@@ -17,7 +19,6 @@ const ViewListing = () => {
   const pageContainer = {
     // background: '#fef3da',
     background: 'rgba(255, 255, 255, 0.4)',
-    margin: '0 0 140px 0',
     padding: '60px 60px',
     borderRadius: '40px',
   };
@@ -39,11 +40,11 @@ const ViewListing = () => {
 
   /* React begins here */
   // const dispatch = useDispatch();
-  let history = useHistory();
+ // let history = useHistory();
 
   //const inputMessage = useSelector(state => state.inquiryReducer.message);
   const [inputMessage, setInputMessage] = React.useState('');
-  
+  const dispatch = useDispatch();
   // listing data
   const title = useSelector(state => state.listingReducer.title);
   const description = useSelector(state => state.listingReducer.description);
@@ -172,7 +173,7 @@ const ViewListing = () => {
               </div>
 
               <div>
-                <input style={msgBox} type='text' name='inquiry' placeholder={'Write your message...'} onChange={e => setInputMessage(e.target.value)} />
+                <input style={msgBox} type='text' name='inquiry' placeholder={'Write your message...'}  onClick={ (e) => setInputMessage(e.target.value)}/>
               </div>
 
             </div>
@@ -180,7 +181,7 @@ const ViewListing = () => {
 
           <div style={{ paddingBottom: '30px' }}>
             <div style={{ float: 'right' }}>
-              <button className='yellow-btn' onClick={() => sendInquiry()}>Send message to seller</button>
+              <button className='yellow-btn' onClick={() => {sendInquiry() , dispatch(setSeeManage(true)); dispatch(setSeeViewListing(false));}}>Send message to seller</button>
             </div>
 
           </div>

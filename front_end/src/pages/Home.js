@@ -1,17 +1,29 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsLoggedIn } from '../redux/actions/userActions';
+import { setIsLoggedIn, setSeeSignIn, setSeeSignUp, setSeeCreateListing, setSeeManage } from '../redux/actions/userActions';
 let axios = require('axios');
+import '../assets/listing.css';
 
-import Listing from './Listing.js';
+import NewListing from './NewListing';
 
 const Home = () => {
+  const pageContainer = {
+    // background: '#fef3da',
+    background: 'rgba(255, 255, 255, 0.4)',
+    margin: '0 0 140px 0',
+    padding: '60px 60px',
+    borderRadius: '40px',
+  };
 
-  let history = useHistory();
+  // let history = useHistory();
   const dispatch = useDispatch(); // must be combined with an action
   const userId = useSelector(state => state.userReducer.userName);
-  
+  const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
+  const seeCreateListing = useSelector(state => state.userReducer.seeCreateListing);
+  // const seeSignIn = useSelector(state => state.userReducer.seeSignIn);
+  // const seeSignUp = useSelector(state => state.userReducer.seeSignUp);
+
   function signOut() {
     let config = {
       method: 'get',
@@ -25,9 +37,6 @@ const Home = () => {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         dispatch(setIsLoggedIn(false));
-
-        // redirect
-        history.push('/');
       })
       .catch(function (error) {
         console.log(error);
@@ -35,7 +44,6 @@ const Home = () => {
   }
 
 
-  const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
 
   const center = {
     margin: 'auto',
@@ -76,12 +84,12 @@ const Home = () => {
     width: '1px',
     background: '#707070',
   };
-  const listingsContainer = {
-    // width: '1150px',
-    display: 'flex',
-    flexWrap: 'wrap',
-    margin: '0 auto',
-  };
+  // const listingsContainer = {
+  //   // width: '1150px',
+  //   display: 'flex',
+  //   flexWrap: 'wrap',
+  //   margin: '0 auto',
+  // };
   const loggedInText = {
     fontWeight: '500',
   };
@@ -103,7 +111,7 @@ const Home = () => {
 
               <div style={titleButtonSpacing}>
                 {!isLoggedIn ? (<button className='button' disabled>Create a new listing</button>) :
-                  (<Link className='button' to='/newlisting'>Create a new listing</Link>)}
+                  (<button className='button' onClick={() => dispatch(setSeeCreateListing(true))}>Create a new listing</button>)}
               </div>
 
               {!isLoggedIn ? (<div>
@@ -120,7 +128,7 @@ const Home = () => {
                   <h4 style={titleRightSmallText}>Create an account</h4>
                 </div>
                 <div>
-                  <Link exact to='/signup' className='button'>Sign up</Link>
+                  <button className='button' onClick={() => { dispatch(setSeeSignUp(true)); dispatch(setSeeSignIn(false)); }}>Sign up</button>
                 </div>
               </div>
 
@@ -134,7 +142,7 @@ const Home = () => {
                   <h4 style={titleRightSmallText}>Log back in</h4>
                 </div>
                 <div>
-                  <Link exact to='/signin' className='button'>Sign in</Link>
+                  <button className='button' onClick={() => { dispatch(setSeeSignIn(true)); dispatch(setSeeSignUp(false)); }}>Sign in</button>
                 </div>
               </div>
             </div>
@@ -146,7 +154,7 @@ const Home = () => {
                   <h1 style={loggedInText}> Hello {userId},</h1>
                   <h1 style={loggedInText}>Welcome back!</h1>
                   <div style={{ display: 'flex', padding: '20px 0 0 0' }}>
-                    <Link exact to='/manage' className='button' style={{ margin: '0 10px 0 0' }}>Manage (#)</Link>
+                    <button className='button' style={{ margin: '0 10px 0 0' }} onClick={() => dispatch(setSeeManage(true))}>Manage (#)</button>
                     <button onClick={() => signOut()} className='button'>Sign Out</button>
                   </div>
                 </div>
@@ -156,19 +164,17 @@ const Home = () => {
           </div>
         </div>
 
+
+        {/* only show if create listing button is pressed */}
         <div>
-          <div className='title'>
-            <h2>Listings</h2>
-          </div>
-          <div style={listingsContainer}>
-
-            {/* <div> */}
-            <Listing />
-            {/* </div> */}
-            
-
-            
-          </div>
+          {seeCreateListing && (
+            <div style={pageContainer} id="myModal" className="modal">
+              <div style={{ background: '#FDEAC3', borderRadius: '40px', }} className="modal-content" >
+                <span className="close" onClick={() => { dispatch(setSeeCreateListing(false)); }}>&times;</span>
+                <NewListing />
+              </div>
+            </div>
+          )}
         </div>
 
       </div>
