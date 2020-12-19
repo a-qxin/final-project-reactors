@@ -40,7 +40,7 @@ const ViewListing = () => {
 
   /* React begins here */
   // const dispatch = useDispatch();
- // let history = useHistory();
+  // let history = useHistory();
 
   //const inputMessage = useSelector(state => state.inquiryReducer.message);
   const [inputMessage, setInputMessage] = React.useState('');

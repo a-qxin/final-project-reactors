@@ -3,7 +3,7 @@ import axios from 'axios';
 // import { Switch, Redirect, useLocation, Link } from 'react-router-dom';
 // import PrivateRoute from './pages/PrivateRoute';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsLoggedIn, setUserId, setSeeSignIn, setSeeSignUp, setSeeCreateListing } from './redux/actions/userActions';
+import { setIsLoggedIn, setUserId, setSeeSignIn, setSeeSignUp, setSeeCreateListing, setUserName } from './redux/actions/userActions';
 import { setSeeViewListing } from './redux/actions/listingActions';
 
 
@@ -68,6 +68,7 @@ const App = () => {
         if (response.data.username) {
           dispatch(setIsLoggedIn(true));
           dispatch(setUserId(response.data._id));
+          dispatch(setUserName(response.data.username));
         }
       })
       .catch(function (error) {

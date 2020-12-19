@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+
+  front_end:
+    build: ./front_end
+    container_name: front_end
+    restart: on-failure
+    network_mode: host
+    depends_on:
+      - back_end
+
+  back_end:
+    build: ./back_end
+    container_name: back_end
+    restart: on-failure
+    network_mode: host
+    depends_on:
+      - redis
+
+  redis:
+    image: bitnami/redis:latest
+    container_name: redis
+    restart: on-failure
+    ports:
+      - "127.0.0.1:6379:6379"
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
