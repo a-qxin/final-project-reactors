@@ -61,6 +61,29 @@ input::placeholder {
   background-color: #a9a9a9;
 }
 
+.vertical-line {
+  width: 1px;
+  background: #707070;
+  margin: 0 10px;
+  visibility:visible;
+}
+@media only screen and (max-width: 768px) {
+  .vertical-line {
+    visibility:hidden;
+  }
+}
+/* @media only screen and (max-width: ) */
+
+/* @media only screen and (max-width: 600px)
+
+@media only screen and (min-width: 600px) 
+
+@media only screen and (min-width: 768px) 
+
+@media only screen and (min-width: 992px)  
+
+@media only screen and (min-width: 1200px)  */
+
 .button {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size:20px;
@@ -98,4 +121,3 @@ input::placeholder {
 #threeCol {
   flex: 0 0 33.3333%;
 }
-

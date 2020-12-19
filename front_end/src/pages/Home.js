@@ -50,6 +50,7 @@ const Home = () => {
     padding: '60px 60px',
     borderRadius: '40px',
     display: 'flex',
+    flexWrap:'wrap',
   };
   const titleButtonSpacing = {
     padding: '80px 0 10px 0'
@@ -58,15 +59,18 @@ const Home = () => {
     padding: '10px 0 0 0'
   };
   const titleRightContainer = {
-    width: '500px',
+    // width: '500px',
     display: 'flex',
+    flexWrap:'wrap',
     verticalAlign: 'center',
     margin: 'auto',
-    textAlign: 'center',
+    textAlign: 'center',    
+    paddingTop:'30px',
   };
   const titleRightText = {
+    width:'200px',
     fontWeight: '500',
-    padding: '0 0 30px 0'
+    padding: '0 0 20px 0',
   };
   const titleRightSmallText = {
     fontWeight: '400',
@@ -75,6 +79,10 @@ const Home = () => {
   const verticalHr = {
     width: '1px',
     background: '#707070',
+    margin:'0 10px',
+  };
+  const buttonBottomPadding = {
+    paddingBottom:'30px',
   };
   const listingsContainer = {
     // width: '1150px',
@@ -92,7 +100,7 @@ const Home = () => {
 
         <div style={center}>
           <div style={heroContainer}>
-            <div>
+            <div style={{marginBottom:'18px'}}>
               <div>
                 <h1>Welcome to the reactorsHub!</h1>
               </div>
@@ -119,12 +127,12 @@ const Home = () => {
                 <div>
                   <h4 style={titleRightSmallText}>Create an account</h4>
                 </div>
-                <div>
+                <div style={buttonBottomPadding}>
                   <Link exact to='/signup' className='button'>Sign up</Link>
                 </div>
               </div>
 
-              <div style={verticalHr}></div>
+              <div className='vertical-line'></div>
 
               <div>
                 <div>
@@ -140,7 +148,7 @@ const Home = () => {
             </div>
             ) : (
               <div style={titleRightContainer}>
-                <div style={verticalHr}></div>
+                <div style={verticalHr} className='vertical-line'></div>
 
                 <div style={{ textAlign: 'start', padding: '40px 40px 40px 100px' }}>
                   <h1 style={loggedInText}> Hello {userId},</h1>
