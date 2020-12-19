@@ -78,16 +78,6 @@ input::placeholder {
   }
 }
 
-/* @media only screen and (max-width: 600px)
-
-@media only screen and (min-width: 600px) 
-
-@media only screen and (min-width: 768px) 
-
-@media only screen and (min-width: 992px)  
-
-@media only screen and (min-width: 1200px)  */
-
 .button {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size:20px;
@@ -126,14 +116,8 @@ input::placeholder {
   flex: 0 0 33.3333%;
 }
 
-
-/* #newListingBtn {
-
-} */
-
-.hero-right-padding-bottom-mobile {
-  margin-bottom:'200px';
-  padding-bottom:'200px'
+#newListingBtn {
+  width: 300px;
 }
 
 .greeting-lg-screens {
@@ -143,6 +127,5 @@ input::placeholder {
 @media only screen and (max-width: 600px) {
   .greeting-lg-screens {
     padding: 0;
-    margin: 0;
   }
 }

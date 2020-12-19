@@ -34,7 +34,6 @@ const Home = () => {
       });
   }
 
-
   const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
 
   const center = {
@@ -46,8 +45,8 @@ const Home = () => {
     background: '-webkit-linear-gradient(90deg, rgba(255,231,98,1) 0%, rgba(247,196,67,1) 60%)',
     background: 'linear-gradient(90deg, rgba(255,231,98,1) 0%, rgba(247,196,67,1) 60%)',
     filter: 'progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffe762",endColorstr="#f7c443",GradientType=1)',
-    margin: '0 0 140px 0',
-    padding: '60px 60px',
+    margin: '0 8px 140px 8px',
+    padding: '60px 40px',
     borderRadius: '40px',
     display: 'flex',
     flexWrap:'wrap',
@@ -59,7 +58,6 @@ const Home = () => {
     padding: '10px 0 0 0'
   };
   const titleRightContainer = {
-    // width: '500px',
     display: 'flex',
     flexWrap:'wrap',
     verticalAlign: 'center',
@@ -76,13 +74,7 @@ const Home = () => {
     fontWeight: '400',
     padding: '0 0 12px 0'
   };
-  // const verticalHr = {
-  //   width: '1px',
-  //   background: '#707070',
-  //   margin:'0 10px',
-  // };
   const listingsContainer = {
-    // width: '1150px',
     display: 'flex',
     flexWrap: 'wrap',
     margin: '0 auto',
@@ -166,13 +158,7 @@ const Home = () => {
             <h2>Listings</h2>
           </div>
           <div style={listingsContainer}>
-
-            {/* <div> */}
             <Listing />
-            {/* </div> */}
-            
-
-            
           </div>
         </div>
 
