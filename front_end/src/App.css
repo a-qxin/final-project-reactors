@@ -72,10 +72,11 @@ input::placeholder {
     display:none;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1100px) {
   .vertical-line {
     visibility:hidden;
   }
+
 }
 
 .button {
@@ -124,7 +125,7 @@ input::placeholder {
   text-align: start;
   padding: 40px 40px 40px 100px;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1000px) {
   .greeting-lg-screens {
     padding: 0;
   }

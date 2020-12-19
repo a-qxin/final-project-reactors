@@ -136,7 +136,7 @@ const Home = () => {
               </div>
             </div>
             ) : (
-              <div style={titleRightContainer}>
+              <div id='greetingMobileAlign' style={titleRightContainer}>
                 <div className='vertical-line'></div>
 
                 <div className='greeting-lg-screens'>
