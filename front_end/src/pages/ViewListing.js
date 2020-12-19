@@ -43,6 +43,7 @@ const ViewListing = () => {
 
   //const inputMessage = useSelector(state => state.inquiryReducer.message);
   const [inputMessage, setInputMessage] = React.useState('');
+  
   // listing data
   const title = useSelector(state => state.listingReducer.title);
   const description = useSelector(state => state.listingReducer.description);
@@ -60,6 +61,7 @@ const ViewListing = () => {
     let data = qs.stringify({
       'userName': userName,
       'userId': userId,
+      'title': title,
       'author': author,
       'listingId': listingId,
       'message': inputMessage,

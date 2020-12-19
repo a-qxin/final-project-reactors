@@ -6,11 +6,12 @@ import { setTitle, setDescription, setStatus, setLocation, setPrice, setListingI
 import webSocket from '../webSocket';
 import axios from 'axios';
 
-const Listing = ({/*listingId*/ }) => {
+const ListingsByAuthor = () => {
   let history = useHistory(); 
   const dispatch = useDispatch();
   
   const [listings, setListings] = React.useState([]);
+
   const listingContainer = {
     textAlign: 'center',
     margin: '20px 0px',
@@ -21,21 +22,22 @@ const Listing = ({/*listingId*/ }) => {
   const listingTitle = {
     margin: '30px'
   };
+
   const handleWebSocketListing = (rawData) => {
     const data = JSON.parse(rawData.data);
     console.log(data);
-    // switch (data.actionType) {
-    //   case 'updateChatMessages':
-    //     setChatMessages(data.chatMessages);
-    //     break;
-    //   default: break;
-    // }
+    
     getListings();
   };
+
   function getListings() {
+  
     let config = {
       method: 'get',
-      url: '/listing/getAllListings',
+      url: '/listing/getByAuthor',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
     };
 
     axios(config)
@@ -47,7 +49,6 @@ const Listing = ({/*listingId*/ }) => {
         console.log(error);
       });
   }
-
   
   function selectListing(listing){
     dispatch(setTitle(listing.title));
@@ -84,4 +85,4 @@ const Listing = ({/*listingId*/ }) => {
   );
 };
 
-export default Listing;
+export default ListingsByAuthor;

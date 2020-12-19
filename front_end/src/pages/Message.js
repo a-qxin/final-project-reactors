@@ -44,6 +44,7 @@ const Message = () => {
   const userName = useSelector(state => state.userReducer.userName);
   const userId = useSelector(state => state.userReducer.userId);
   
+  const title = useSelector(state => state.listingReducer.title);
   const author = useSelector(state => state.listingReducer.author);
   const listingId = useSelector(state => state.listingReducer.listingId);
 
@@ -56,6 +57,7 @@ const Message = () => {
     let data = qs.stringify({
       'userName': userName,
       'userId': userId,
+      'title': title,
       'author': author,
       'listingId': listingId,
       'message': inputMessage,
@@ -86,9 +88,11 @@ const Message = () => {
   }
 
   function syncMessages() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
     let config = {
       method: 'get',
-      url: `/inquiry?listingId=${listingId}`,
+      url: `/inquiry?listingId=${id}`,
     };
 
     axios(config)

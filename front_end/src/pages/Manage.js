@@ -1,5 +1,5 @@
 import React from 'react';
-import Listing from './Listing.js';
+import ListingsByAuthor from './ListingsByAuthor.js';
 import { useHistory } from 'react-router-dom';
 import { useSelector, /*useDispatch*/ } from 'react-redux';
 //import { makeInquiry } from '../redux/actions/inquiryActions';
@@ -184,7 +184,7 @@ const Manage = () => {
             <h2>Manage Listings</h2>
           </div>
           <div>
-            <Listing id='listingItem' />
+            <ListingsByAuthor id='listingItem' />
           </div>
         </div>
 
