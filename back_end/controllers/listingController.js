@@ -21,7 +21,7 @@ exports.create = function (req, res) {
 
 // update listing
 exports.update = function (req, res) {
-    console.log()
+    console.log('In the update function')
     //create a new listing object
     let listing = new Listing(req.body, req.visitorId, req.body.listingId)
     listing.update().then((status) => {
@@ -93,7 +93,7 @@ exports.getAllListings = function (req, res) {
         console.log(listings)
         res.send(listings)
     })
-        .catch(function (err) {
-            res.send(err)
-        })
+    .catch(function (err) {
+        res.send(err)
+    })
 }

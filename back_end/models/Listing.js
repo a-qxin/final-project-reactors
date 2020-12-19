@@ -97,6 +97,8 @@ Listing.reusableListingQuery = function(uniqueOperations, visitorId) {
 Listing.prototype.update = function(){
     return new Promise (async (resolve, reject) => {
         try {
+            console.log(this.requestedPostId)
+            console.log(this.userid)
             let listing = await Listing.findListingById(this.requestedPostId , this.userid)
             if (listing.isVisitorOwner) {
                 // actually update the db
@@ -105,13 +107,13 @@ Listing.prototype.update = function(){
             } else {
                 reject("Person is not owner of post")
             }
-        } catch {
-
+        } catch(err) {
+            console.log(err)
         }
     })
 }
 
-Listing.dbUpdate = function () {
+Listing.prototype.dbUpdate = function () {
     return new Promise(async(resolve, reject)=>{
         this.cleanUp()
         this.validate()

@@ -88,6 +88,7 @@ Inquiry.getByUserId = function (userId){
             if (err) {
                 reject(err)
             }
+            console.log(inquiries)
             resolve(inquiries)
         });
     })
