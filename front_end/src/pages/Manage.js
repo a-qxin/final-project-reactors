@@ -49,7 +49,7 @@ const Manage = () => {
 
     let config = {
       method: 'post',
-      url: '/inquiry/getByAuthor',
+      url: '/inquiry/getByAuthorId',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -132,17 +132,17 @@ const Manage = () => {
 
               <hr className='hr' />
               <div>{inquiries.map((inquiry, i) => (
-                <div onClick={() => getMessage(inquiries.authorId)} style={{ display: 'flex', fontWeight: 'bold' }} key={i}>
+                <div onClick={() => getMessage(inquiries.userId)} style={{ display: 'flex', fontWeight: 'bold' }} key={i}>
                   <div id='threeCol'>
                     <h3 style={newMessageText}>
-                      {inquiry.author.username}
+                      {inquiry.userName}
                     </h3>
                     <hr />
                   </div>
-                  <div id='threeCol'>
+                  {/* <div id='threeCol'>
                     <h3 style={newMessageText}>{inquiry.title}</h3>
                     <hr />
-                  </div>
+                  </div> */}
                   <div id='threeCol'>
                     <h3 style={newMessageText}>{inquiry.message}</h3>
                     <hr />
@@ -153,17 +153,17 @@ const Manage = () => {
 
               </div>
               <div>{myInquiries.map((inquiry, i) => (
-                <div onClick={() => getMessage(myInquiries.authorId)} style={{ display: 'flex', fontWeight: 'bold' }} key={i}>
+                <div onClick={() => getMessage(myInquiries.userId)} style={{ display: 'flex', fontWeight: 'bold' }} key={i}>
                   <div id='threeCol'>
                     <h3 style={newMessageText}>
-                      {myInquiry.author.username}
+                      {inquiry.author}
                     </h3>
                     <hr />
                   </div>
-                  <div id='threeCol'>
+                  {/* <div id='threeCol'>
                     <h3 style={newMessageText}>{inquiry.title}</h3>
                     <hr />
-                  </div>
+                  </div> */}
                   <div id='threeCol'>
                     <h3 style={newMessageText}>{inquiry.message}</h3>
                     <hr />

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Switch, Redirect, useLocation, Link } from 'react-router-dom';
 import PrivateRoute from './pages/PrivateRoute';
 import { useDispatch } from 'react-redux';
-import { setIsLoggedIn } from './redux/actions/userActions';
+import { setIsLoggedIn, setUserId } from './redux/actions/userActions';
 
 import Home from './pages/Home';
 import NewListing from './pages/NewListing';
@@ -25,10 +25,9 @@ const App = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));        
         if(response.data.username){
-          console.log(response.data.username);
           dispatch(setIsLoggedIn(true));
+          dispatch(setUserId(response.data._id));
         }
       })
       .catch(function (error) {

@@ -5,14 +5,14 @@ let axios = require('axios');
 let qs = require('qs');
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserName, setEmail, setPassword, setConfirmPassword, setIsLoggedIn} from '../redux/actions/userActions';
+import { setUserName, setEmail, setPassword, setConfirmPassword, setIsLoggedIn } from '../redux/actions/userActions';
 
 const SignUp = () => {
   const mainContainer = {
     height: '80vh',
     width: '90vw',
-    display:'flex',
-    margin:'auto',
+    display: 'flex',
+    margin: 'auto',
   };
 
   const image = {
@@ -22,7 +22,7 @@ const SignUp = () => {
 
   const verticalHr = {
     width: '1px',
-    background:'#707070',
+    background: '#707070',
   };
 
   const rightContainer = {
@@ -41,13 +41,13 @@ const SignUp = () => {
 
   const fieldContainer = {
     display: 'flex',
-    margin:'20px 0'
+    margin: '20px 0'
   };
   const fieldTitle = {
-    width:'225px'
+    width: '225px'
   };
   const inputField = {
-    width:'300px',
+    width: '300px',
   };
 
   const dispatch = useDispatch(); // must be combined with an action
@@ -56,7 +56,7 @@ const SignUp = () => {
   const password = useSelector(state => state.userReducer.password);
   const confirmPassword = useSelector(state => state.userReducer.confirmPassword);
 
-  function registerUser () {
+  function registerUser() {
     console.log(`Registering user with \nUsername : ${userName} \nEmail : ${email}`);
 
     // front-end validation stuff
@@ -64,16 +64,16 @@ const SignUp = () => {
     let data = qs.stringify({
       'username': userName,
       'email': email,
-      'password': password 
+      'password': password
     });
 
     let config = {
       method: 'post',
       url: '/register',
-      headers: { 
+      headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      data : data
+      data: data
     };
 
     axios(config)
@@ -82,8 +82,8 @@ const SignUp = () => {
         console.log(response.status);
         dispatch(setIsLoggedIn(true));
         // redirect
-        //history.push('/');
-        window.location.href = '/';
+        history.push('/');
+        // window.location.href = '/';
       })
       .catch(function (error) {
         console.log(error);
@@ -91,9 +91,9 @@ const SignUp = () => {
     // send the request
   }
 
-  return(
+  return (
     <div style={mainContainer}>
-      <img src={signupcat} style={image}/>
+      <img src={signupcat} style={image} />
 
       <div style={verticalHr}></div>
 
@@ -106,24 +106,24 @@ const SignUp = () => {
         <div style={fields}>
           <div style={fieldContainer}>
             <h2 style={fieldTitle}>Name:</h2>
-            <input style={inputField} value={userName} onChange={e => dispatch(setUserName(e.target.value))}/>
+            <input style={inputField} value={userName} onChange={e => dispatch(setUserName(e.target.value))} />
           </div>
           <div style={fieldContainer}>
             <h2 style={fieldTitle}>Email:</h2>
-            <input style={inputField} value={email} onChange={e => dispatch(setEmail(e.target.value))}/>            
+            <input style={inputField} value={email} onChange={e => dispatch(setEmail(e.target.value))} />
           </div>
           <div style={fieldContainer}>
             <h2 style={fieldTitle}>Password:</h2>
-            <input style={inputField}  type='password' value={password} onChange={e => dispatch(setPassword(e.target.value))}/>                 
+            <input style={inputField} type='password' value={password} onChange={e => dispatch(setPassword(e.target.value))} />
           </div>
           <div style={fieldContainer}>
             <h2 style={fieldTitle}>Confirm Password:</h2>
-            <input style={inputField}  type='password' value={confirmPassword} onChange={e => dispatch(setConfirmPassword(e.target.value))}/>    
+            <input style={inputField} type='password' value={confirmPassword} onChange={e => dispatch(setConfirmPassword(e.target.value))} />
           </div>
         </div>
         {/* <button onClick={() => dispatch(setIsLoggedIn(true))}></button> */}
         {/* <button id="register-form-btn" className='yellow-btn' onClick={()=> dispatch(register())}>Sign Up</button> */}
-        <button id="register-form-btn" className='yellow-btn' onClick={()=>registerUser()}>Sign Up</button>
+        <button id="register-form-btn" className='yellow-btn' onClick={() => registerUser()}>Sign Up</button>
       </div>
 
     </div>

@@ -3,6 +3,11 @@ export const setUserName = (userName) => ({
   userName,
 });
 
+export const setUserId = (userId) => ({
+  type: 'USER_ID_SET',
+  userId,
+});
+
 export const setEmail = (email) => ({
   type: 'USER_EMAIL_SET',
   email,

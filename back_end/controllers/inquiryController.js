@@ -27,9 +27,8 @@ exports.getById = function (req, res){
 
 // Get inquiry by id 
 exports.getByAuthorId = function (req, res){
-    console.log('Get by author id function endpoint is called.')
-    console.log(req.body.authorId)
-    Listing.getByAuthor(req.body.authorId).then(function(listings){
+    console.log('Get by author id function endpoint is called. the author id is' , req.body.userId)
+    Inquiry.getByAuthorId(req.body.userId).then(function(listings){
         res.send(listings)
     })
     .catch(function(err){
@@ -37,3 +36,12 @@ exports.getByAuthorId = function (req, res){
     })
 }
 
+exports.getByUserId = function (req, res){
+    console.log('Get by author id function endpoint is called. the author id is' , req.body.userId)
+    Inquiry.getByUserId(req.body.userId).then(function(listings){
+        res.send(listings)
+    })
+    .catch(function(err){
+        res.send(err)
+    })
+}

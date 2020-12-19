@@ -10,16 +10,20 @@ let Inquiry = function(data){
 Inquiry.prototype.cleanUp = function() {
     //Check type
     if(typeof(this.data.listingId) != "string"){this.data.listingId= ""}
+    if(typeof(this.data.title) != "string"){this.data.title= ""}
     if(typeof(this.data.message) != "string"){this.data.message= ""}
     if(typeof(this.data.author) != "string"){this.data.author= ""}
+    if(typeof(this.data.userName) != "string"){this.data.userName= ""}
     if(typeof(this.data.userId) != "string"){this.data.userId= ""}
     
     //get rid of any bogus properties and trim whitespace
     this.data = {
-        listingId: this.data.listingId,
-        message: this.data.message,
-        author: this.data.author,
-        userId: this.data.userId,
+        listingId : this.data.listingId,
+        title     : this.data.title,
+        message   : this.data.message,
+        author    : this.data.author, //the person that wrote this listing
+        userName  : this.data.userName, // user name of the in
+        userId    : this.data.userId,
     }
 }
 
@@ -89,5 +93,21 @@ Inquiry.getByUserId = function (userId){
     })
 }
 
+Inquiry.getByAuthorId = function (userId){
+    return new Promise(async (resolve, reject)=> {
+        if(typeof(userId) != "string"){
+            reject()
+            return
+        }        
+
+        // Find all matching documents
+        inquiryCollection.find({author : userId}).toArray(function(err, inquiries) {
+            if (err) {
+                reject(err)
+            }
+            resolve(inquiries)
+        });
+    })
+}
 
 module.exports = Inquiry

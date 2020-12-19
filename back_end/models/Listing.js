@@ -82,6 +82,7 @@ Listing.reusableListingQuery = function(uniqueOperations, visitorId) {
         listings = listings.map((listing)=>{
             listing.isVisitorOwner = listing.authorId.equals(visitorId)
             listing.authorId = undefined
+            console.log(listing)
             listing.author = {
                 username: listing.author.username,
             }
