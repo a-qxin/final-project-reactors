@@ -70,20 +70,17 @@ const Home = () => {
   const titleRightText = {
     width:'200px',
     fontWeight: '500',
-    padding: '0 0 20px 0',
+    padding: '20px 0 20px 0',
   };
   const titleRightSmallText = {
     fontWeight: '400',
     padding: '0 0 12px 0'
   };
-  const verticalHr = {
-    width: '1px',
-    background: '#707070',
-    margin:'0 10px',
-  };
-  const buttonBottomPadding = {
-    paddingBottom:'30px',
-  };
+  // const verticalHr = {
+  //   width: '1px',
+  //   background: '#707070',
+  //   margin:'0 10px',
+  // };
   const listingsContainer = {
     // width: '1150px',
     display: 'flex',
@@ -110,8 +107,8 @@ const Home = () => {
               </div>
 
               <div style={titleButtonSpacing}>
-                {!isLoggedIn ? (<button className='button' disabled>Create a new listing</button>) :
-                  (<Link className='button' to='/newlisting'>Create a new listing</Link>)}
+                {!isLoggedIn ? (<button id='newListingBtn' className='button' disabled>Create a new listing</button>) :
+                  (<Link id='newListingBtn' className='button' to='/newlisting'>Create a new listing</Link>)}
               </div>
 
               {!isLoggedIn ? (<div>
@@ -127,7 +124,7 @@ const Home = () => {
                 <div>
                   <h4 style={titleRightSmallText}>Create an account</h4>
                 </div>
-                <div style={buttonBottomPadding}>
+                <div>
                   <Link exact to='/signup' className='button'>Sign up</Link>
                 </div>
               </div>
@@ -148,9 +145,9 @@ const Home = () => {
             </div>
             ) : (
               <div style={titleRightContainer}>
-                <div style={verticalHr} className='vertical-line'></div>
+                <div className='vertical-line'></div>
 
-                <div style={{ textAlign: 'start', padding: '40px 40px 40px 100px' }}>
+                <div className='greeting-lg-screens'>
                   <h1 style={loggedInText}> Hello {userId},</h1>
                   <h1 style={loggedInText}>Welcome back!</h1>
                   <div style={{ display: 'flex', padding: '20px 0 0 0' }}>

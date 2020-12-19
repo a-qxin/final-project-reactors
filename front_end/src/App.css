@@ -67,12 +67,16 @@ input::placeholder {
   margin: 0 10px;
   visibility:visible;
 }
+@media only screen and (max-width: 600px) {
+  .vertical-line {
+    display:none;
+  }
+}
 @media only screen and (max-width: 768px) {
   .vertical-line {
     visibility:hidden;
   }
 }
-/* @media only screen and (max-width: ) */
 
 /* @media only screen and (max-width: 600px)
 
@@ -120,4 +124,25 @@ input::placeholder {
 
 #threeCol {
   flex: 0 0 33.3333%;
+}
+
+
+/* #newListingBtn {
+
+} */
+
+.hero-right-padding-bottom-mobile {
+  margin-bottom:'200px';
+  padding-bottom:'200px'
+}
+
+.greeting-lg-screens {
+  text-align: start;
+  padding: 40px 40px 40px 100px;
+}
+@media only screen and (max-width: 600px) {
+  .greeting-lg-screens {
+    padding: 0;
+    margin: 0;
+  }
 }
