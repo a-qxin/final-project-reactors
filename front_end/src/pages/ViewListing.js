@@ -40,7 +40,7 @@ const ViewListing = () => {
 
   /* React begins here */
   // const dispatch = useDispatch();
- // let history = useHistory();
+  // let history = useHistory();
 
   //const inputMessage = useSelector(state => state.inquiryReducer.message);
   const [inputMessage, setInputMessage] = React.useState('');
@@ -52,16 +52,15 @@ const ViewListing = () => {
   const location = useSelector(state => state.listingReducer.location);
   const price = useSelector(state => state.listingReducer.price);
   const userName = useSelector(state => state.userReducer.userName);
-  const userId = useSelector(state => state.userReducer.userId);
+  const inquierer = useSelector(state => state.userReducer.userId);
   const author = useSelector(state => state.listingReducer.author);
   const listingId = useSelector(state => state.listingReducer.listingId);
-
   function sendInquiry() {
     // front-end validation stuff
     console.log('this is passed in ' + JSON.stringify(location.state));
     let data = qs.stringify({
       'userName': userName,
-      'userId': userId,
+      'userId': inquierer,
       'title': title,
       'author': author,
       'listingId': listingId,
@@ -173,7 +172,7 @@ const ViewListing = () => {
               </div>
 
               <div>
-                <input style={msgBox} type='text' name='inquiry' placeholder={'Write your message...'}  onClick={ (e) => setInputMessage(e.target.value)}/>
+                <input style={msgBox} type='text' name='inquiry' placeholder={'Write your message...'} onClick={(e) => setInputMessage(e.target.value)} />
               </div>
 
             </div>
@@ -181,7 +180,7 @@ const ViewListing = () => {
 
           <div style={{ paddingBottom: '30px' }}>
             <div style={{ float: 'right' }}>
-              <button className='yellow-btn' onClick={() => {sendInquiry() , dispatch(setSeeManage(true)); dispatch(setSeeViewListing(false));}}>Send message to seller</button>
+              <button className='yellow-btn' onClick={() => { sendInquiry(), dispatch(setSeeManage(true)); dispatch(setSeeViewListing(false)); }}>Send message to seller</button>
             </div>
 
           </div>
