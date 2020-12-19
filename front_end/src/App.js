@@ -13,6 +13,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Manage from './pages/Manage';
 import ViewListing from './pages/ViewListing';
+import EditListing from './pages/EditListing';
 import './assets/listing.css';
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
   const seeSignUp = useSelector(state => state.userReducer.seeSignUp);
   const seeManage = useSelector(state => state.userReducer.seeManage);
   const seeViewListing = useSelector(state => state.listingReducer.seeViewListing);
+  const seeEditListing = useSelector(state => state.listingReducer.seeEditListing)
   const title = {
     cursor: 'pointer'
   };
@@ -132,6 +134,18 @@ const App = () => {
         </div>
         {/* only show if listing is pressed */}
         <div >
+          {seeEditListing && (
+            <div style={pageContainer} id="myModal" className="modal">
+              <div style={{ background: '#FDEAC3', borderRadius: '40px',}} className="modal-content">
+                <span className="close" onClick={() => {dispatch(setSeeViewListing(false));}}>&times;</span>
+                <EditListing />
+              </div>
+            </div>
+          )}
+          </div>
+
+        {/* only show if listing is pressed */}
+        <div >
           {seeViewListing && (
             <div style={pageContainer} id="myModal" className="modal">
               <div style={{ background: '#FDEAC3', borderRadius: '40px',}} className="modal-content">
@@ -152,9 +166,8 @@ const App = () => {
 
         </div>
       </div>
-
-
     </div>
+            
   );
 };
 

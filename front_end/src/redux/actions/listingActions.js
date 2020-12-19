@@ -38,3 +38,13 @@ export const setSeeViewListing = (seeViewListing) => ({
   seeViewListing,
 });
 
+
+export const setSeeEditListing = (seeEditListing) => ({
+  type: 'SET_SEE_EDIT_LISTING',
+  seeEditListing,
+});
+
+export const setIsUserOwner = (isUserOwner) => ({
+  type: 'SET_IS_USER_OWNER',
+  isUserOwner,
+});

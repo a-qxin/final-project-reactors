@@ -1,13 +1,11 @@
 import React from 'react';
 import defaultImage from '../assets/defaultimage.svg';
-import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setTitle, setDescription, setStatus, setLocation, setPrice, setListingId} from '../redux/actions/listingActions';
 import webSocket from '../webSocket';
 import axios from 'axios';
 
 const ListingsByAuthor = () => {
-  let history = useHistory(); 
   const dispatch = useDispatch();
   
   const [listings, setListings] = React.useState([]);
@@ -15,10 +13,9 @@ const ListingsByAuthor = () => {
   const listingContainer = {
     textAlign: 'center',
     margin: '20px 0px',
-    // padding: '70px 0 40px 0',
     borderRadius: '30px',
-    // display:'flex',
   };
+
   const listingTitle = {
     margin: '30px'
   };
@@ -57,9 +54,13 @@ const ListingsByAuthor = () => {
     dispatch(setLocation(listing.location));
     dispatch(setPrice(listing.price));
     dispatch(setListingId(listing._id));
-    
-    history.push('/viewListing');
+    if(listing.isVisitorOwner){
+      console.log('Set state to show current user as owner');
+      dispatch(setIsUserOwner(true));
+    }
+    dispatch(setSeeViewListing(true));
   }
+
   React.useEffect(() => {
     getListings();
     webSocket.onmessage = (m) => handleWebSocketListing(m);

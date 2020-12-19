@@ -5,14 +5,11 @@ import defaultImage from '../assets/defaultimage.svg';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setSeeManage } from '../redux/actions/userActions';
-import { setSeeViewListing } from '../redux/actions/listingActions';
 import axios from 'axios';
+import { setSeeViewListing, setSeeEditListing } from '../redux/actions/listingActions';
 let qs = require('qs');
 
 const ViewListing = () => {
-
-  // const urlParams = new URLSearchParams(window.location.search);
-
   const center = {
     margin: 'auto',
   };
@@ -40,7 +37,7 @@ const ViewListing = () => {
 
   /* React begins here */
   // const dispatch = useDispatch();
- // let history = useHistory();
+  // let history = useHistory();
 
   //const inputMessage = useSelector(state => state.inquiryReducer.message);
   const [inputMessage, setInputMessage] = React.useState('');
@@ -55,6 +52,7 @@ const ViewListing = () => {
   const userId = useSelector(state => state.userReducer.userId);
   const author = useSelector(state => state.listingReducer.author);
   const listingId = useSelector(state => state.listingReducer.listingId);
+  const isUserOwner = useSelector(state => state.listingReducer.isUserOwner);
 
   function sendInquiry() {
     // front-end validation stuff
@@ -171,20 +169,30 @@ const ViewListing = () => {
                 <h2 style={fieldTitle}>Price:</h2>
                 <h2>${price}</h2>
               </div>
-
-              <div>
-                <input style={msgBox} type='text' name='inquiry' placeholder={'Write your message...'}  onClick={ (e) => setInputMessage(e.target.value)}/>
+              {!isUserOwner && (
+                <div>
+                  <input style={msgBox} type='text' name='inquiry' placeholder={'Write your message...'}  onClick={ (e) => setInputMessage(e.target.value)}/>
+                </div>
+              )}
+             
+            </div>
+          </div>
+          {!isUserOwner && (            
+            <div style={{ paddingBottom: '30px' }}>
+              <div style={{ float: 'right' }}>
+                <button className='yellow-btn' onClick={() => {sendInquiry() , dispatch(setSeeManage(true)); dispatch(setSeeViewListing(false));}}>Send message to seller</button>
               </div>
 
             </div>
-          </div>
+          )}
 
-          <div style={{ paddingBottom: '30px' }}>
-            <div style={{ float: 'right' }}>
-              <button className='yellow-btn' onClick={() => {sendInquiry() , dispatch(setSeeManage(true)); dispatch(setSeeViewListing(false));}}>Send message to seller</button>
+          {isUserOwner && (            
+            <div style={{ paddingBottom: '30px' }}>
+              <div style={{ float: 'right' }}>
+                <button className='yellow-btn' onClick={() => {dispatch(setSeeEditListing(true)) , dispatch(setSeeViewListing(false));}}>Update Listing</button>
+              </div>
             </div>
-
-          </div>
+          )}
 
         </div>
       </div>

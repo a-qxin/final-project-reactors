@@ -7,6 +7,8 @@ const initState = () => ({
   author: 'sam',
   listingId: '123',
   seeViewListing: false,
+  isUserOwner: false,
+  seeEditListing: false
 });
 
 // keep track of the current app state
@@ -40,17 +42,16 @@ const listingReducer = (state = initState(), action) => {
         ...state, // copy old state
         price: action.price, // input the new price
       };
+    case 'SET_LISTING_ID':
+      return {
+        ...state, // copy old state
+        listingId: action.listingId, // input the new price
+      };
     case 'SET_AUTHOR':
       return {
         ...state, // copy old state
         author: action.author, // input the new author
       };
-    case 'SET_LISTING_ID':
-      return {
-        ...state, // copy old state
-        listingId: action.listingId, // input the new listing id
-      };
-
     case 'USER_SET_LOGGED_IN':
       return {
         ...state,
@@ -61,8 +62,16 @@ const listingReducer = (state = initState(), action) => {
         ...state,
         seeViewListing: action.seeViewListing,
       };
-
-
+    case 'SET_SEE_EDIT_LISTING':
+      return {
+        ...state,
+        seeEditListing: action.seeEditListing,
+      };
+    case 'SET_IS_USER_OWNER':
+      return {
+        ...state,
+        isUserOwner: action.isUserOwner,
+      };
     default:
       // we don't want to modify state, ignore action
       return state;
