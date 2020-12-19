@@ -82,8 +82,8 @@ const SignUp = () => {
         console.log(response.status);
         dispatch(setIsLoggedIn(true));
         // redirect
-        history.push('/');
-        // window.location.href = '/';
+        // history.push('/');
+        window.location.href = '/';
       })
       .catch(function (error) {
         console.log(error);
